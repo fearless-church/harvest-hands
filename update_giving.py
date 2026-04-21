@@ -2,6 +2,7 @@ import os
 import re
 import requests
 
+OVERFLOW_CLIENT_ID = os.environ["OVERFLOW_CLIENT_ID"]
 OVERFLOW_API_KEY = os.environ["OVERFLOW_API_KEY"]
 BASE_URL = "https://server.overflow.co/api/v3"
 
@@ -31,7 +32,10 @@ def get_subcampaigns_for_parent(headers, parent_id):
     return resp.json().get("data", [])
 
 def get_harvest_hands_total():
-    headers = {"x-client-id": OVERFLOW_API_KEY}
+    headers = {
+        "x-client-id": OVERFLOW_CLIENT_ID,
+        "x-api-key": OVERFLOW_API_KEY
+    }
 
     all_campaigns = get_all_campaigns(headers)
 
