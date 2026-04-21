@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,99 +7,51 @@
 <title>HARVEST HANDS | FEARLESS</title>
 <meta name="description" content="Harvest Hands is the Fearless Church building campaign. Possess the promise. Prepare the house. It's time to build." />
 
-<!-- Open Graph (Facebook, iMessage, Slack, LinkedIn preview) -->
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Fearless Church" />
 <meta property="og:title" content="HARVEST HANDS | FEARLESS" />
 <meta property="og:description" content="It's time to build. Join Fearless Church in possessing the promise and preparing the house." />
 <meta property="og:url" content="https://harvesthands.fearless.church" />
-<meta property="og:image" content="assets/photos/preview.jpg" />
+<meta property="og:image" content="preview.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 
-<!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="HARVEST HANDS | FEARLESS" />
 <meta name="twitter:description" content="It's time to build. Join Fearless Church in possessing the promise and preparing the house." />
-<meta name="twitter:image" content="assets/photos/preview.jpg" />
-
-<!--
-  HARVEST HANDS // BUILDING CAMPAIGN LANDING PAGE
-  ---------------------------------------------------------------
-  Standalone HTML design file. Open directly in a browser to preview.
-  Two-color palette: cream + charcoal. Ascentis for headlines,
-  Neue Haas Grotesk for body + key numeric callouts.
-
-  SECTION RHYTHM (top to bottom):
-    1.  Hero              dark (video)
-    2.  Vision Video      cream
-    3.  Scripture         photo bg
-    4.  Pastor Letter     cream (with Jeremy + Christy photo)
-    5.  Two Phases        dark
-    6.  Progress          cream
-    7.  Renders Gallery   dark
-    8.  Building History  cream
-    9.  Waves of Revival  dark
-   10.  The Model         cream
-   11.  Tier Ladder       dark
-   12.  Two Ways to Give  cream
-   13.  Ways to Give      dark
-   14.  Pledge Form       cream
-   15.  FAQ               dark
-   16.  Final CTA         photo bg
-
-  ASSETS TO DROP IN LATER:
-    - assets/video/hero-flyover.mp4         (hero background video, wired)
-    - assets/video/hero-flyover-poster.jpg  (still shown while video loads)
-    - assets/photos/scripture-bg.jpg        (scripture section photo bg)
-    - assets/photos/final-cta-bg.jpg        (final CTA photo bg)
-    - assets/photos/johnsons.jpg            (Jeremy + Christy portrait, 3:4, wired)
-    - assets/photos/exterior.jpg            (renders gallery large feature, wired)
-    - assets/photos/sanctuary.jpg           (renders gallery detail, wired)
-    - assets/photos/studio.jpg              (renders gallery detail, wired)
-    - assets/photos/kidz.jpg                (renders gallery detail, wired)
-    - https://fearlessla.churchcenter.com/people/forms/1207280                      (Planning Center pledge form endpoint)
-    - assets/photos/preview.jpg          (1200x630 social-share preview image)
-    - data-raised + .hh-thermo-fill width   (weekly progress update)
--->
+<meta name="twitter:image" content="preview.jpg" />
 
 <style>
-  /* ===== FONTS ===== */
   @font-face {
     font-family: 'Ascentis';
-    src: url('assets/fonts/Ascentis-Regular.otf') format('opentype');
+    src: url('Ascentis-Regular.otf') format('opentype');
     font-weight: 400; font-style: normal; font-display: swap;
   }
   @font-face {
     font-family: 'Neue Haas';
-    src: url('assets/fonts/NeueHaasDisplayRoman.ttf') format('truetype');
+    src: url('NeueHaasDisplayRoman.ttf') format('truetype');
     font-weight: 400; font-style: normal; font-display: swap;
   }
   @font-face {
     font-family: 'Neue Haas';
-    src: url('assets/fonts/NeueHaasDisplayBold.ttf') format('truetype');
+    src: url('NeueHaasDisplayBold.ttf') format('truetype');
     font-weight: 700; font-style: normal; font-display: swap;
   }
   @font-face {
     font-family: 'Neue Haas';
-    src: url('assets/fonts/NeueHaasDisplayBlack.ttf') format('truetype');
+    src: url('NeueHaasDisplayBlack.ttf') format('truetype');
     font-weight: 900; font-style: normal; font-display: swap;
   }
 
-  /* ===== PALETTE & TOKENS ===== */
   :root {
     --cream: #ede2cc;
     --charcoal: #0f0d0b;
-
-    /* Surface / foreground (defaults: cream surface, charcoal text) */
     --bg: var(--cream);
     --fg: var(--charcoal);
     --fg-muted: rgba(15, 13, 11, 0.72);
     --fg-soft: rgba(15, 13, 11, 0.55);
     --fg-rule: rgba(15, 13, 11, 0.18);
     --fg-rule-soft: rgba(15, 13, 11, 0.12);
-
-    /* Rhythm tokens (consistent spacing across ALL sections) */
     --pad-section-y: 120px;
     --pad-section-x: 32px;
     --gap-intro-content: 64px;
@@ -111,7 +64,6 @@
     --max-lead: 620px;
   }
 
-  /* Dark + photo sections flip the surface/foreground */
   .hh-section--dark,
   .hh-section--photo {
     --bg: var(--charcoal);
@@ -122,7 +74,6 @@
     --fg-rule-soft: rgba(237, 226, 204, 0.14);
   }
 
-  /* ===== RESET ===== */
   *, *::before, *::after { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
@@ -138,7 +89,6 @@
   a { color: inherit; text-decoration: none; }
   p { margin: 0 0 var(--margin-p); }
 
-  /* ===== SECTION SYSTEM ===== */
   section { position: relative; }
   .hh-section {
     position: relative;
@@ -159,8 +109,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background:
-      linear-gradient(180deg, rgba(15,13,11,0.55) 0%, rgba(15,13,11,0.72) 55%, rgba(15,13,11,0.88) 100%);
+    background: linear-gradient(180deg, rgba(15,13,11,0.55) 0%, rgba(15,13,11,0.72) 55%, rgba(15,13,11,0.88) 100%);
     z-index: 0;
   }
   .hh-section--photo::after {
@@ -180,21 +129,10 @@
   .hh-narrow { max-width: var(--max-narrow); margin: 0 auto; position: relative; z-index: 2; }
   .hh-center { text-align: center; }
   .hh-lead { max-width: var(--max-lead); margin-left: auto; margin-right: auto; }
-
-  /* Section intro block (eyebrow + h2 + lead) */
   .hh-intro { text-align: center; margin-bottom: var(--gap-intro-content); }
   .hh-intro .hh-body { margin: 0 auto; }
+  .hh-rule { height: 1px; width: 100%; background: var(--fg-rule); border: 0; margin: 0; }
 
-  /* Hairline section divider (only between two cream sections) */
-  .hh-rule {
-    height: 1px;
-    width: 100%;
-    background: var(--fg-rule);
-    border: 0;
-    margin: 0;
-  }
-
-  /* ===== TYPOGRAPHY ===== */
   .hh-display {
     font-family: 'Ascentis', Georgia, 'Times New Roman', serif;
     font-weight: 400;
@@ -218,14 +156,9 @@
     margin-bottom: var(--margin-eyebrow);
   }
 
-  .hh-body {
-    font-size: 17px;
-    line-height: 1.75;
-    color: var(--fg-muted);
-  }
+  .hh-body { font-size: 17px; line-height: 1.75; color: var(--fg-muted); }
   .hh-body strong { color: var(--fg); font-weight: 700; }
 
-  /* Dedicated class for Neue Haas display-number callouts */
   .hh-callout {
     font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
     font-weight: 700;
@@ -245,7 +178,6 @@
     margin-bottom: var(--margin-eyebrow);
   }
 
-  /* ===== BUTTONS ===== */
   .hh-btn {
     display: inline-block;
     font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
@@ -268,7 +200,6 @@
   .hh-btn-secondary:hover { background-color: var(--fg); color: var(--bg); }
   .hh-btn-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
 
-  /* ===== HERO ===== */
   .hh-hero {
     position: relative;
     height: 100vh;
@@ -332,7 +263,7 @@
     color: var(--cream);
     opacity: 0.7;
     margin: 0 0 26px;
-    padding-left: 0.55em; /* compensate last-letter tracking so it feels optically centered */
+    padding-left: 0.55em;
   }
   .hh-hero-logo {
     width: min(380px, 62vw);
@@ -385,7 +316,6 @@
     opacity: 0.7;
   }
 
-  /* ===== VISION VIDEO ===== */
   .hh-video-wrap {
     position: relative;
     width: 100%;
@@ -397,7 +327,6 @@
   }
   .hh-video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
-  /* ===== SCRIPTURE ===== */
   .hh-scripture .hh-inner { text-align: center; }
   .hh-scripture-quote {
     font-family: 'Ascentis', Georgia, serif;
@@ -415,13 +344,7 @@
     opacity: 0.75;
   }
 
-  /* ===== TWO PHASES ===== */
-  .hh-phase-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--gap-grid);
-    justify-content: center;
-  }
+  .hh-phase-grid { display: flex; flex-wrap: wrap; gap: var(--gap-grid); justify-content: center; }
   .hh-phase-card {
     flex: 1 1 360px;
     max-width: 480px;
@@ -431,37 +354,11 @@
     padding: 48px 40px 44px;
     text-align: left;
   }
-  .hh-phase-num {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.38em;
-    text-transform: uppercase;
-    opacity: 0.6;
-    margin-bottom: 16px;
-  }
-  .hh-phase-title {
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 40px;
-    line-height: 1.05;
-    margin-bottom: 18px;
-    color: var(--fg);
-  }
-  .hh-phase-amount {
-    font-family: 'Neue Haas', sans-serif;
-    font-weight: 900;
-    font-size: 44px;
-    letter-spacing: -0.02em;
-    color: var(--fg);
-    margin-bottom: 22px;
-  }
-  .hh-phase-desc {
-    font-size: 15.5px;
-    line-height: 1.75;
-    color: var(--fg-muted);
-    margin: 0;
-  }
+  .hh-phase-num { font-size: 11px; font-weight: 700; letter-spacing: 0.38em; text-transform: uppercase; opacity: 0.6; margin-bottom: 16px; }
+  .hh-phase-title { font-family: 'Ascentis', Georgia, serif; font-size: 40px; line-height: 1.05; margin-bottom: 18px; color: var(--fg); }
+  .hh-phase-amount { font-family: 'Neue Haas', sans-serif; font-weight: 900; font-size: 44px; letter-spacing: -0.02em; color: var(--fg); margin-bottom: 22px; }
+  .hh-phase-desc { font-size: 15.5px; line-height: 1.75; color: var(--fg-muted); margin: 0; }
 
-  /* ===== PROGRESS THERMOMETER ===== */
   .hh-progress .hh-inner { text-align: center; }
   .hh-window-card {
     display: inline-block;
@@ -472,30 +369,10 @@
     text-align: center;
     max-width: 620px;
   }
-  .hh-window-label {
-    font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    opacity: 0.65;
-    margin-bottom: 8px;
-  }
-  .hh-window-dates {
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 26px;
-    line-height: 1.25;
-    color: var(--fg);
-    margin-bottom: 6px;
-  }
-  .hh-window-meta {
-    font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    opacity: 0.75;
-  }
+  .hh-window-label { font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; opacity: 0.65; margin-bottom: 8px; }
+  .hh-window-dates { font-family: 'Ascentis', Georgia, serif; font-size: 26px; line-height: 1.25; color: var(--fg); margin-bottom: 6px; }
+  .hh-window-meta { font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.75; }
+
   .hh-thermo-phases {
     display: flex;
     justify-content: space-between;
@@ -508,694 +385,89 @@
     color: var(--fg);
     opacity: 0.85;
   }
-  .hh-thermo-phase {
-    flex: 0 0 50%;
-    text-align: center;
-    position: relative;
-  }
-  .hh-thermo-phase span {
-    display: block;
-    font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-top: 6px;
-    opacity: 0.65;
-  }
-  .hh-thermo {
-    max-width: 820px;
-    margin: 0 auto;
-    height: 18px;
-    background-color: var(--fg-rule-soft);
-    border: 1px solid var(--fg-rule);
-    position: relative;
-    overflow: hidden;
-  }
-  .hh-thermo-fill {
-    height: 100%;
-    background: var(--fg);
-    transition: width 0.8s ease;
-  }
-  .hh-thermo-mark {
-    position: absolute;
-    top: -4px;
-    bottom: -4px;
-    width: 2px;
-    background: var(--fg);
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    opacity: 0.55;
-  }
-  .hh-thermo-meta {
-    display: flex;
-    justify-content: space-between;
-    max-width: 820px;
-    margin: 16px auto 0;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--fg);
-  }
-  .hh-thermo-note {
-    margin-top: 32px;
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 20px;
-    opacity: 0.75;
-  }
+  .hh-thermo-phase { flex: 0 0 50%; text-align: center; position: relative; }
+  .hh-thermo-phase span { display: block; font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 6px; opacity: 0.65; }
+  .hh-thermo { max-width: 820px; margin: 0 auto; height: 18px; background-color: var(--fg-rule-soft); border: 1px solid var(--fg-rule); position: relative; overflow: hidden; }
+  .hh-thermo-fill { height: 100%; background: var(--fg); transition: width 0.8s ease; }
+  .hh-thermo-mark { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--fg); left: 50%; transform: translateX(-50%); z-index: 2; opacity: 0.55; }
+  .hh-thermo-meta { display: flex; justify-content: space-between; max-width: 820px; margin: 16px auto 0; font-size: 12px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg); }
+  .hh-thermo-note { margin-top: 32px; font-family: 'Ascentis', Georgia, serif; font-size: 20px; opacity: 0.75; }
 
-  /* ===== TIER LADDER ===== */
-  .hh-tier-table {
-    width: 100%;
-    max-width: 980px;
-    margin: 0 auto;
-    border-collapse: collapse;
-    border-top: 1px solid var(--fg-rule);
-  }
-  .hh-tier-table thead th {
-    font-family: 'Neue Haas', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    padding: 22px 18px;
-    text-align: left;
-    border-bottom: 1px solid var(--fg-rule);
-    opacity: 0.65;
-    color: var(--fg);
-  }
+  .hh-tier-table { width: 100%; max-width: 980px; margin: 0 auto; border-collapse: collapse; border-top: 1px solid var(--fg-rule); }
+  .hh-tier-table thead th { font-family: 'Neue Haas', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; padding: 22px 18px; text-align: left; border-bottom: 1px solid var(--fg-rule); opacity: 0.65; color: var(--fg); }
   .hh-tier-table thead th.hh-num-col { text-align: left; }
-  .hh-tier-table tbody td {
-    padding: 22px 18px;
-    border-bottom: 1px solid var(--fg-rule-soft);
-    vertical-align: middle;
-    color: var(--fg);
-  }
-  .hh-tier-table tbody td.hh-tier-count {
-    text-align: left;
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 26px;
-    line-height: 1;
-  }
-  .hh-tier-table tbody td.hh-tier-gift {
-    font-family: 'Neue Haas', sans-serif;
-    font-weight: 700;
-    font-size: 20px;
-    letter-spacing: -0.01em;
-  }
-  .hh-tier-table tbody td.hh-tier-monthly {
-    font-family: 'Neue Haas', sans-serif;
-    font-size: 15px;
-    color: var(--fg-muted);
-  }
-  .hh-tier-table tbody tr.hh-tier-total td {
-    background-color: var(--fg);
-    color: var(--bg);
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-size: 14px;
-    border-bottom: none;
-  }
-  .hh-tier-table tbody tr.hh-tier-total td.hh-tier-gift {
-    font-size: 24px;
-    letter-spacing: -0.01em;
-    text-transform: none;
-  }
-  .hh-tier-caption {
-    max-width: var(--max-narrow);
-    margin: 40px auto 0;
-    text-align: center;
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 22px;
-    line-height: 1.55;
-    color: var(--fg);
-  }
+  .hh-tier-table tbody td { padding: 22px 18px; border-bottom: 1px solid var(--fg-rule-soft); vertical-align: middle; color: var(--fg); }
+  .hh-tier-table tbody td.hh-tier-count { text-align: left; font-family: 'Ascentis', Georgia, serif; font-size: 26px; line-height: 1; }
+  .hh-tier-table tbody td.hh-tier-gift { font-family: 'Neue Haas', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: -0.01em; }
+  .hh-tier-table tbody td.hh-tier-monthly { font-family: 'Neue Haas', sans-serif; font-size: 15px; color: var(--fg-muted); }
+  .hh-tier-table tbody tr.hh-tier-total td { background-color: var(--fg); color: var(--bg); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 14px; border-bottom: none; }
+  .hh-tier-table tbody tr.hh-tier-total td.hh-tier-gift { font-size: 24px; letter-spacing: -0.01em; text-transform: none; }
+  .hh-tier-caption { max-width: var(--max-narrow); margin: 40px auto 0; text-align: center; font-family: 'Ascentis', Georgia, serif; font-size: 22px; line-height: 1.55; color: var(--fg); }
 
-  /* ===== THREE GIVING LANES ===== */
   .hh-lanes-grid { display: flex; flex-wrap: wrap; gap: var(--gap-grid); }
-  .hh-lane {
-    flex: 1 1 280px;
-    background-color: transparent;
-    border: 1px solid var(--fg-rule);
-    border-top: 3px solid var(--fg);
-    padding: 48px 36px 42px;
-  }
-  .hh-lane-num {
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 68px;
-    line-height: 1;
-    color: var(--fg);
-    opacity: 0.22;
-    margin-bottom: 10px;
-  }
-  .hh-lane-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    opacity: 0.6;
-    margin-bottom: 14px;
-  }
-  .hh-lane-title {
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 36px;
-    line-height: 1.05;
-    margin-bottom: 22px;
-  }
-  .hh-lane-quote {
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 18px;
-    line-height: 1.55;
-    color: var(--fg);
-    padding-left: 18px;
-    border-left: 2px solid var(--fg);
-    margin-bottom: 20px;
-  }
-  .hh-lane-body {
-    font-size: 15px;
-    line-height: 1.75;
-    color: var(--fg-muted);
-    margin: 0 0 26px;
-  }
-  .hh-lane-cta {
-    display: inline-block;
-    margin-top: 4px;
-  }
-  .hh-lanes-footnote {
-    margin-top: 40px;
-    text-align: center;
-    font-size: 14px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--fg-muted);
-    font-weight: 700;
-  }
-  .hh-lanes-footnote a {
-    color: var(--fg);
-    border-bottom: 1px solid var(--fg-rule);
-  }
+  .hh-lane { flex: 1 1 280px; background-color: transparent; border: 1px solid var(--fg-rule); border-top: 3px solid var(--fg); padding: 48px 36px 42px; }
+  .hh-lane-num { font-family: 'Ascentis', Georgia, serif; font-size: 68px; line-height: 1; color: var(--fg); opacity: 0.22; margin-bottom: 10px; }
+  .hh-lane-label { font-size: 11px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.6; margin-bottom: 14px; }
+  .hh-lane-title { font-family: 'Ascentis', Georgia, serif; font-size: 36px; line-height: 1.05; margin-bottom: 22px; }
+  .hh-lane-quote { font-family: 'Ascentis', Georgia, serif; font-size: 18px; line-height: 1.55; color: var(--fg); padding-left: 18px; border-left: 2px solid var(--fg); margin-bottom: 20px; }
+  .hh-lane-body { font-size: 15px; line-height: 1.75; color: var(--fg-muted); margin: 0 0 26px; }
+  .hh-lane-cta { display: inline-block; margin-top: 4px; }
+  .hh-lanes-footnote { margin-top: 40px; text-align: center; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-muted); font-weight: 700; }
+  .hh-lanes-footnote a { color: var(--fg); border-bottom: 1px solid var(--fg-rule); }
   .hh-lanes-footnote a:hover { border-bottom-color: var(--fg); }
 
-  /* ===== HISTORY OF THE BUILDING ===== */
-  .hh-history-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--gap-grid);
-    margin-top: var(--gap-intro-content);
-  }
-  .hh-history-card {
-    display: flex;
-    flex-direction: column;
-  }
-  .hh-history-photo {
-    aspect-ratio: 4 / 3;
-    background-size: cover;
-    background-position: center;
-    background-color: #d9cfb8;
-    border: 1px solid var(--fg-rule);
-    margin-bottom: 22px;
-    filter: saturate(0.85) contrast(1.02);
-  }
-  .hh-history-year {
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 42px;
-    line-height: 1;
-    color: var(--fg);
-    margin-bottom: 16px;
-    letter-spacing: -0.01em;
-    padding-top: 18px;
-    border-top: 2px solid var(--fg);
-  }
-  .hh-history-title {
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 22px;
-    line-height: 1.15;
-    margin-bottom: 14px;
-    color: var(--fg);
-  }
-  .hh-history-desc {
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--fg-muted);
-    margin: 0;
-  }
-  .hh-history-sources {
-    margin-top: 44px;
-    font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--fg);
-    opacity: 0.55;
-    text-align: center;
-  }
+  .hh-history-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-grid); margin-top: var(--gap-intro-content); }
+  .hh-history-card { display: flex; flex-direction: column; }
+  .hh-history-photo { aspect-ratio: 4 / 3; background-size: cover; background-position: center; background-color: #d9cfb8; border: 1px solid var(--fg-rule); margin-bottom: 22px; filter: saturate(0.85) contrast(1.02); }
+  .hh-history-year { font-family: 'Ascentis', Georgia, serif; font-size: 42px; line-height: 1; color: var(--fg); margin-bottom: 16px; letter-spacing: -0.01em; padding-top: 18px; border-top: 2px solid var(--fg); }
+  .hh-history-title { font-family: 'Ascentis', Georgia, serif; font-size: 22px; line-height: 1.15; margin-bottom: 14px; color: var(--fg); }
+  .hh-history-desc { font-size: 14px; line-height: 1.7; color: var(--fg-muted); margin: 0; }
+  .hh-history-sources { margin-top: 44px; font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg); opacity: 0.55; text-align: center; }
 
-  /* ===== FOUR WAVES OF REVIVAL ===== */
-  .hh-revival-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 28px;
-    margin-top: var(--gap-intro-content);
-  }
-  .hh-revival-card {
-    border: 1px solid var(--fg-rule);
-    padding: 40px 38px 36px;
-    display: grid;
-    grid-template-columns: 110px 1fr;
-    gap: 0 28px;
-    align-items: start;
-  }
-  .hh-revival-year {
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 54px;
-    line-height: 1;
-    color: var(--fg);
-    letter-spacing: -0.01em;
-  }
-  .hh-revival-meta {
-    padding-top: 6px;
-  }
-  .hh-revival-title {
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 24px;
-    line-height: 1.15;
-    color: var(--fg);
-    margin-bottom: 10px;
-  }
-  .hh-revival-distance {
-    font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--fg);
-    opacity: 0.55;
-  }
-  .hh-revival-desc {
-    grid-column: 1 / -1;
-    margin: 24px 0 0;
-    padding-top: 22px;
-    border-top: 1px solid var(--fg-rule);
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--fg-muted);
-  }
+  .hh-revival-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: var(--gap-intro-content); }
+  .hh-revival-card { border: 1px solid var(--fg-rule); padding: 40px 38px 36px; display: grid; grid-template-columns: 110px 1fr; gap: 0 28px; align-items: start; }
+  .hh-revival-year { font-family: 'Ascentis', Georgia, serif; font-size: 54px; line-height: 1; color: var(--fg); letter-spacing: -0.01em; }
+  .hh-revival-meta { padding-top: 6px; }
+  .hh-revival-title { font-family: 'Ascentis', Georgia, serif; font-size: 24px; line-height: 1.15; color: var(--fg); margin-bottom: 10px; }
+  .hh-revival-distance { font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--fg); opacity: 0.55; }
+  .hh-revival-desc { grid-column: 1 / -1; margin: 24px 0 0; padding-top: 22px; border-top: 1px solid var(--fg-rule); font-size: 14px; line-height: 1.7; color: var(--fg-muted); }
 
-  /* ===== FIVE REVENUE STREAMS ===== */
-  .hh-streams-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 24px;
-    margin-top: var(--gap-intro-content);
-  }
-  .hh-stream-card {
-    border-top: 1px solid var(--fg-rule);
-    padding: 22px 0 0;
-  }
-  .hh-stream-num {
-    font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--fg);
-    opacity: 0.55;
-    margin-bottom: 16px;
-  }
-  .hh-stream-title {
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 28px;
-    line-height: 1.05;
-    color: var(--fg);
-    margin-bottom: 20px;
-  }
-  .hh-stream-size {
-    font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--fg);
-    opacity: 0.7;
-    margin-bottom: 22px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--fg-rule);
-  }
-  .hh-stream-range-label {
-    font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.26em;
-    text-transform: uppercase;
-    color: var(--fg);
-    opacity: 0.55;
-    margin-bottom: 10px;
-  }
-  .hh-stream-range {
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 20px;
-    line-height: 1.1;
-    color: var(--fg);
-  }
-  .hh-streams-total {
-    margin-top: 48px;
-    padding-top: 28px;
-    border-top: 2px solid var(--fg);
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  .hh-streams-total-label {
-    font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--fg);
-    opacity: 0.75;
-  }
-  .hh-streams-total-amount {
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 40px;
-    line-height: 1;
-    color: var(--fg);
-    letter-spacing: -0.01em;
-  }
+  .hh-streams-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; margin-top: var(--gap-intro-content); }
+  .hh-stream-card { border-top: 1px solid var(--fg-rule); padding: 22px 0 0; }
+  .hh-stream-num { font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--fg); opacity: 0.55; margin-bottom: 16px; }
+  .hh-stream-title { font-family: 'Ascentis', Georgia, serif; font-size: 28px; line-height: 1.05; color: var(--fg); margin-bottom: 20px; }
+  .hh-stream-size { font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg); opacity: 0.7; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--fg-rule); }
+  .hh-stream-range-label { font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; color: var(--fg); opacity: 0.55; margin-bottom: 10px; }
+  .hh-stream-range { font-family: 'Ascentis', Georgia, serif; font-size: 20px; line-height: 1.1; color: var(--fg); }
+  .hh-streams-total { margin-top: 48px; padding-top: 28px; border-top: 2px solid var(--fg); display: flex; justify-content: space-between; align-items: baseline; gap: 20px; flex-wrap: wrap; }
+  .hh-streams-total-label { font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--fg); opacity: 0.75; }
+  .hh-streams-total-amount { font-family: 'Ascentis', Georgia, serif; font-size: 40px; line-height: 1; color: var(--fg); letter-spacing: -0.01em; }
+  .hh-address-line { margin-top: 44px; text-align: center; font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--fg); opacity: 0.7; }
+  .hh-address-line strong { font-weight: 700; opacity: 1; letter-spacing: 0.28em; }
 
-  /* ===== ADDRESS CALLOUT (used in Model) ===== */
-  .hh-address-line {
-    margin-top: 44px;
-    text-align: center;
-    font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    color: var(--fg);
-    opacity: 0.7;
-  }
-  .hh-address-line strong {
-    font-weight: 700;
-    opacity: 1;
-    letter-spacing: 0.28em;
-  }
-
-  /* ===== LETTER (with pastor photo) ===== */
-  .hh-letter-layout {
-    display: flex;
-    gap: var(--gap-intro-content);
-    align-items: flex-start;
-  }
-  .hh-letter-photo {
-    flex: 0 0 360px;
-    aspect-ratio: 3 / 4;
-    background-color: var(--charcoal);
-    background-size: cover;
-    background-position: center;
-    border: 1px solid var(--fg-rule);
-    box-shadow: 0 30px 60px -20px rgba(15,13,11,0.25);
-    position: relative;
-  }
-  .hh-letter-photo-caption {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    opacity: 0.6;
-    margin-top: 14px;
-  }
+  .hh-letter-layout { display: flex; gap: var(--gap-intro-content); align-items: flex-start; }
+  .hh-letter-photo { flex: 0 0 360px; aspect-ratio: 3 / 4; background-color: var(--charcoal); background-size: cover; background-position: center; border: 1px solid var(--fg-rule); box-shadow: 0 30px 60px -20px rgba(15,13,11,0.25); position: relative; }
   .hh-letter-content { flex: 1 1 auto; min-width: 0; }
-  .hh-letter-greeting {
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 42px;
-    line-height: 1.1;
-    margin: 0 0 var(--margin-h2);
-    color: var(--fg);
-  }
-  .hh-letter-content p {
-    font-size: 17.5px;
-    line-height: 1.85;
-    color: var(--fg-muted);
-    margin: 0 0 22px;
-  }
+  .hh-letter-greeting { font-family: 'Ascentis', Georgia, serif; font-size: 42px; line-height: 1.1; margin: 0 0 var(--margin-h2); color: var(--fg); }
+  .hh-letter-content p { font-size: 17.5px; line-height: 1.85; color: var(--fg-muted); margin: 0 0 22px; }
   .hh-letter-content p strong { font-weight: 700; color: var(--fg); }
-  .hh-pull {
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 26px;
-    line-height: 1.45;
-    color: var(--fg);
-    padding: 0 0 0 26px;
-    margin: 32px 0;
-    border-left: 3px solid var(--fg);
-  }
-  .hh-letter-sig {
-    margin-top: 40px;
-    padding-top: 28px;
-    border-top: 1px solid var(--fg-rule);
-  }
-  .hh-letter-sig-name {
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 28px;
-    line-height: 1.2;
-    margin-bottom: 6px;
-    color: var(--fg);
-  }
-  .hh-letter-sig-role {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    opacity: 0.6;
-  }
+  .hh-pull { font-family: 'Ascentis', Georgia, serif; font-size: 26px; line-height: 1.45; color: var(--fg); padding: 0 0 0 26px; margin: 32px 0; border-left: 3px solid var(--fg); }
+  .hh-letter-sig { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--fg-rule); }
+  .hh-letter-sig-name { font-family: 'Ascentis', Georgia, serif; font-size: 28px; line-height: 1.2; margin-bottom: 6px; color: var(--fg); }
+  .hh-letter-sig-role { font-size: 11px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.6; }
 
-  /* ===== WAYS TO GIVE ===== */
-  .hh-ways-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--gap-grid);
-  }
-  .hh-way {
-    flex: 1 1 240px;
-    background-color: transparent;
-    border: 1px solid var(--fg-rule);
-    padding: 36px 30px;
-    text-align: left;
-  }
-  .hh-way-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    opacity: 0.6;
-    margin-bottom: 14px;
-  }
-  .hh-way-title {
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 28px;
-    line-height: 1.1;
-    margin-bottom: 14px;
-  }
-  .hh-way-detail {
-    font-size: 14.5px;
-    line-height: 1.7;
-    color: var(--fg-muted);
-    margin: 0;
-  }
-  .hh-way-detail a {
-    color: var(--fg);
-    border-bottom: 1px solid var(--fg-rule);
-  }
+  .hh-ways-grid { display: flex; flex-wrap: wrap; gap: var(--gap-grid); }
+  .hh-way { flex: 1 1 240px; background-color: transparent; border: 1px solid var(--fg-rule); padding: 36px 30px; text-align: left; }
+  .hh-way-label { font-size: 10px; font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase; opacity: 0.6; margin-bottom: 14px; }
+  .hh-way-title { font-family: 'Ascentis', Georgia, serif; font-size: 28px; line-height: 1.1; margin-bottom: 14px; }
+  .hh-way-detail { font-size: 14.5px; line-height: 1.7; color: var(--fg-muted); margin: 0; }
+  .hh-way-detail a { color: var(--fg); border-bottom: 1px solid var(--fg-rule); }
   .hh-way-detail a:hover { border-bottom-color: var(--fg); }
 
-  /* ===== PLEDGE FORM ===== */
-  .hh-form-card {
-    max-width: 820px;
-    margin: 0 auto;
-    background-color: transparent;
-    border: 1px solid var(--fg-rule);
-    border-top: 3px solid var(--fg);
-    padding: 60px 52px 52px;
-  }
-  .hh-form-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 22px;
-    margin-bottom: 24px;
-  }
-  .hh-field { flex: 1 1 240px; display: flex; flex-direction: column; }
-  .hh-field label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    opacity: 0.6;
-    margin-bottom: 10px;
-  }
-  .hh-field input,
-  .hh-field select {
-    background-color: transparent;
-    border: 0;
-    border-bottom: 1.5px solid var(--fg);
-    color: var(--fg);
-    font-family: 'Neue Haas', sans-serif;
-    font-size: 17px;
-    padding: 10px 2px 12px;
-    width: 100%;
-    appearance: none;
-    -webkit-appearance: none;
-    border-radius: 0;
-  }
-  .hh-field input::placeholder { color: var(--fg-soft); }
-  .hh-field input:focus,
-  .hh-field select:focus { outline: none; background-color: var(--fg-rule-soft); }
-  .hh-formula {
-    border-top: 1px solid var(--fg-rule);
-    border-bottom: 1px solid var(--fg-rule);
-    padding: 28px 0;
-    margin: 12px 0 28px;
-  }
-  .hh-formula-title {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    opacity: 0.6;
-    margin-bottom: 22px;
-  }
-  .hh-formula-row {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    margin-bottom: 16px;
-  }
-  .hh-formula-row:last-child { margin-bottom: 0; padding-top: 16px; border-top: 1px solid var(--fg-rule); }
-  .hh-formula-row label {
-    flex: 1 1 auto;
-    font-size: 14.5px;
-    line-height: 1.5;
-    color: var(--fg-muted);
-    letter-spacing: 0;
-    text-transform: none;
-    opacity: 1;
-    margin: 0;
-  }
-  .hh-formula-row input {
-    flex: 0 0 180px;
-    background-color: transparent;
-    border: 0;
-    border-bottom: 1.5px solid var(--fg-rule);
-    color: var(--fg);
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 22px;
-    text-align: right;
-    padding: 10px 2px;
-  }
-  .hh-formula-row input[readonly] { border-bottom-color: var(--fg); border-bottom-width: 2.5px; }
-  .hh-form-submit-row { text-align: center; margin-top: 12px; }
-  .hh-form-submit {
-    display: inline-block;
-    background-color: var(--fg);
-    color: var(--bg);
-    font-family: 'Neue Haas', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    padding: 22px 60px;
-    border: 1.5px solid var(--fg);
-    cursor: pointer;
-    transition: opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease;
-  }
-  .hh-form-submit:hover { background-color: transparent; color: var(--fg); }
-  .hh-form-disclaimer {
-    margin: 22px 0 0;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    opacity: 0.6;
-  }
+  .hh-cta-card { max-width: 560px; margin: 0 auto; padding: 56px 32px 52px; text-align: center; border: 1px solid var(--fg-rule); border-top: 3px solid var(--fg); }
+  .hh-btn-jumbo { padding: 24px 24px; font-size: 13px; width: 300px; }
+  .hh-cta-note { margin: 22px 0 0; font-size: 11px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.6; }
 
-  /* ===== FAQ ===== */
-  .hh-faq-list { margin: 0; border-top: 1px solid var(--fg-rule); }
-  .hh-faq-item { border-bottom: 1px solid var(--fg-rule-soft); }
-  .hh-faq-item summary {
-    list-style: none;
-    cursor: pointer;
-    padding: 28px 8px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-    font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
-    font-weight: 700;
-    font-size: 18px;
-    letter-spacing: -0.005em;
-    line-height: 1.35;
-    color: var(--fg);
-  }
-  .hh-faq-item summary::-webkit-details-marker { display: none; }
-  .hh-faq-item summary::after {
-    content: '+';
-    font-family: 'Neue Haas', sans-serif;
-    font-size: 22px;
-    font-weight: 400;
-    color: var(--fg);
-    transition: transform 0.2s ease;
-  }
-  .hh-faq-item[open] summary::after { content: '\2013'; }
-  .hh-faq-answer {
-    padding: 0 8px 28px;
-    font-size: 15.5px;
-    line-height: 1.8;
-    color: var(--fg-muted);
-    max-width: 780px;
-  }
-
-  /* ===== FINAL CTA (photo bg) ===== */
-  .hh-final .hh-h2 { font-size: 96px; margin-bottom: 22px; }
-  .hh-final-lead {
-    font-family: 'Ascentis', Georgia, serif;
-    font-size: 26px;
-    line-height: 1.5;
-    color: var(--fg);
-    opacity: 0.9;
-    max-width: 620px;
-    margin: 0 auto 40px;
-  }
-  .hh-final .hh-btn-primary { padding: 22px 24px; font-size: 13px; }
-  .hh-final .hh-btn-secondary { padding: 22px 24px; font-size: 13px; }
-
-  /* ===== PLEDGE CTA CARD ===== */
-  .hh-cta-card {
-    max-width: 560px;
-    margin: 0 auto;
-    padding: 56px 32px 52px;
-    text-align: center;
-    border: 1px solid var(--fg-rule);
-    border-top: 3px solid var(--fg);
-  }
-  .hh-btn-jumbo {
-    padding: 24px 24px;
-    font-size: 13px;
-    width: 300px;
-  }
-  .hh-cta-note {
-    margin: 22px 0 0;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    opacity: 0.6;
-  }
-
-  /* ===== FIXED "GIVE NOW" PIN ===== */
   .hh-give-pin {
     position: fixed;
     top: 22px;
@@ -1217,186 +489,64 @@
   }
   .hh-give-pin:hover { transform: translateY(-1px); background-color: transparent; color: #ede2cc; border-color: #ede2cc; }
 
-  /* Ways-to-give in-card button (intentionally smaller than main buttons) */
-  .hh-way .hh-btn {
-    display: inline-block;
-    margin-top: 18px;
-    width: auto;
-    min-width: 0;
-    padding: 14px 28px;
-    font-size: 11px;
-    letter-spacing: 0.28em;
-  }
+  .hh-way .hh-btn { display: inline-block; margin-top: 18px; width: auto; min-width: 0; padding: 14px 28px; font-size: 11px; letter-spacing: 0.28em; }
 
-  /* ===== CUSTOM YOUTUBE PLAYER (minimal branding) ===== */
-  .hh-video-player {
-    position: relative;
-    width: 100%;
-    padding-top: 56.25%;
-    background-color: var(--charcoal);
-    border: 1px solid var(--fg-rule);
-    box-shadow: 0 30px 60px -20px rgba(15,13,11,0.25);
-    margin-top: var(--gap-intro-content);
-    cursor: pointer;
-    overflow: hidden;
-  }
-  .hh-video-thumb {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease, filter 0.4s ease;
-  }
+  .hh-video-player { position: relative; width: 100%; padding-top: 56.25%; background-color: var(--charcoal); border: 1px solid var(--fg-rule); box-shadow: 0 30px 60px -20px rgba(15,13,11,0.25); margin-top: var(--gap-intro-content); cursor: pointer; overflow: hidden; }
+  .hh-video-thumb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease, filter 0.4s ease; }
   .hh-video-player:hover .hh-video-thumb { transform: scale(1.02); filter: brightness(0.92); }
-  .hh-video-player iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
-  .hh-video-play {
-    position: absolute;
-    left: 22px;
-    bottom: 22px;
-    z-index: 2;
-    width: 56px;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(237, 226, 204, 0.94);
-    color: #0f0d0b;
-    border: 0;
-    border-radius: 999px;
-    cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-    box-shadow: 0 10px 30px -8px rgba(0,0,0,0.5);
-  }
+  .hh-video-player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .hh-video-play { position: absolute; left: 22px; bottom: 22px; z-index: 2; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; background-color: rgba(237, 226, 204, 0.94); color: #0f0d0b; border: 0; border-radius: 999px; cursor: pointer; transition: transform 0.2s ease, background-color 0.2s ease; box-shadow: 0 10px 30px -8px rgba(0,0,0,0.5); }
   .hh-video-play:hover { transform: scale(1.06); background-color: #ede2cc; }
   .hh-video-play svg { width: 18px; height: 18px; margin-left: 3px; }
-  .hh-video-player.is-playing .hh-video-thumb,
-  .hh-video-player.is-playing .hh-video-play { display: none; }
+  .hh-video-player.is-playing .hh-video-thumb, .hh-video-player.is-playing .hh-video-play { display: none; }
 
-  /* ===== RENDERS GALLERY ===== */
-  .hh-renders-intro { text-align: center; margin-bottom: var(--gap-intro-content); }
-  .hh-render-hero {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background-color: #1a1612;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border: 1px solid var(--fg-rule);
-    margin-bottom: var(--gap-grid);
-    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5);
-    transition: transform 0.4s ease;
-  }
+  .hh-render-hero { width: 100%; aspect-ratio: 16 / 9; background-color: #1a1612; background-size: cover; background-position: center; background-repeat: no-repeat; border: 1px solid var(--fg-rule); margin-bottom: var(--gap-grid); box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5); transition: transform 0.4s ease; }
   .hh-render-hero:hover { transform: translateY(-2px); }
-  .hh-render-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--gap-grid);
-  }
-  .hh-render {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-  }
-  .hh-render-img {
-    aspect-ratio: 3 / 2;
-    background-color: #1a1612;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border: 1px solid var(--fg-rule);
-    transition: transform 0.3s ease;
-  }
+  .hh-render-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-grid); }
+  .hh-render { margin: 0; display: flex; flex-direction: column; }
+  .hh-render-img { aspect-ratio: 3 / 2; background-color: #1a1612; background-size: cover; background-position: center; background-repeat: no-repeat; border: 1px solid var(--fg-rule); transition: transform 0.3s ease; }
   .hh-render:hover .hh-render-img { transform: translateY(-2px); }
-  .hh-render-caption {
-    font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    opacity: 0.65;
-    margin-top: 16px;
-    color: var(--fg);
-  }
 
-  /* ===== ANIMATION SYSTEM ===== */
+  .hh-faq-list { margin: 0; border-top: 1px solid var(--fg-rule); }
+  .hh-faq-item { border-bottom: 1px solid var(--fg-rule-soft); }
+  .hh-faq-item summary { list-style: none; cursor: pointer; padding: 28px 8px; display: flex; align-items: center; justify-content: space-between; gap: 18px; font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-weight: 700; font-size: 18px; letter-spacing: -0.005em; line-height: 1.35; color: var(--fg); }
+  .hh-faq-item summary::-webkit-details-marker { display: none; }
+  .hh-faq-item summary::after { content: '+'; font-family: 'Neue Haas', sans-serif; font-size: 22px; font-weight: 400; color: var(--fg); transition: transform 0.2s ease; }
+  .hh-faq-item[open] summary::after { content: '\2013'; }
+  .hh-faq-answer { padding: 0 8px 28px; font-size: 15.5px; line-height: 1.8; color: var(--fg-muted); max-width: 780px; }
 
-  /* Smooth anchor scrolling for in-page links */
+  .hh-final .hh-h2 { font-size: 96px; margin-bottom: 22px; }
+  .hh-final-lead { font-family: 'Ascentis', Georgia, serif; font-size: 26px; line-height: 1.5; color: var(--fg); opacity: 0.9; max-width: 620px; margin: 0 auto 40px; }
+  .hh-final .hh-btn-primary { padding: 22px 24px; font-size: 13px; }
+  .hh-final .hh-btn-secondary { padding: 22px 24px; font-size: 13px; }
+
   html { scroll-behavior: smooth; }
-
-  /* Default entry state for elements that will reveal on scroll */
-  .hh-reveal {
-    opacity: 0;
-    transform: translateY(28px);
-    transition:
-      opacity 900ms cubic-bezier(0.2, 0.7, 0.2, 1),
-      transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
-    will-change: opacity, transform;
-  }
+  .hh-reveal { opacity: 0; transform: translateY(28px); transition: opacity 900ms cubic-bezier(0.2, 0.7, 0.2, 1), transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1); will-change: opacity, transform; }
   .hh-reveal.is-visible { opacity: 1; transform: none; }
-
-  /* Subtle stagger via nth-child for grid children that get .hh-reveal */
   .hh-reveal.is-visible:nth-child(2) { transition-delay: 80ms; }
   .hh-reveal.is-visible:nth-child(3) { transition-delay: 160ms; }
   .hh-reveal.is-visible:nth-child(4) { transition-delay: 240ms; }
 
-  /* Hero content loads with its own intro animation (no scroll required) */
-  .hh-hero-content > * {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: hhHeroRise 1100ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
-  }
+  .hh-hero-content > * { opacity: 0; transform: translateY(20px); animation: hhHeroRise 1100ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards; }
   .hh-hero-content > *:nth-child(1) { animation-delay: 200ms; }
   .hh-hero-content > *:nth-child(2) { animation-delay: 400ms; }
   .hh-hero-content > *:nth-child(3) { animation-delay: 600ms; }
   .hh-hero-content > *:nth-child(4) { animation-delay: 800ms; }
   .hh-hero-content > *:nth-child(5) { animation-delay: 1000ms; }
-  @keyframes hhHeroRise {
-    to { opacity: 1; transform: none; }
-  }
+  @keyframes hhHeroRise { to { opacity: 1; transform: none; } }
 
-  /* Hero video slow Ken Burns drift */
-  .hh-hero-video {
-    animation: hhKenBurns 28s ease-in-out infinite alternate;
-    transform-origin: center center;
-  }
-  @keyframes hhKenBurns {
-    0%   { transform: scale(1.02) translate(0, 0); }
-    100% { transform: scale(1.08) translate(-1.2%, -0.6%); }
-  }
+  .hh-hero-video { animation: hhKenBurns 28s ease-in-out infinite alternate; transform-origin: center center; }
+  @keyframes hhKenBurns { 0% { transform: scale(1.02) translate(0, 0); } 100% { transform: scale(1.08) translate(-1.2%, -0.6%); } }
 
-  /* Scroll cue gentle bob */
   .hh-scroll-cue { animation: hhScrollCue 2.8s ease-in-out infinite; }
-  @keyframes hhScrollCue {
-    0%, 100% { transform: translate(-50%, 0); opacity: 0.7; }
-    50%      { transform: translate(-50%, 6px); opacity: 1; }
-  }
+  @keyframes hhScrollCue { 0%, 100% { transform: translate(-50%, 0); opacity: 0.7; } 50% { transform: translate(-50%, 6px); opacity: 1; } }
 
-  /* Thermometer fills from left when revealed */
-  .hh-thermo-fill {
-    width: 0 !important;
-    transition: width 1600ms cubic-bezier(0.22, 0.9, 0.3, 1);
-  }
-  .hh-thermo.is-filled .hh-thermo-fill {
-    width: var(--fill-width, 8.5%) !important;
-  }
+  .hh-thermo-fill { width: 0 !important; transition: width 1600ms cubic-bezier(0.22, 0.9, 0.3, 1); }
+  .hh-thermo.is-filled .hh-thermo-fill { width: var(--fill-width, 8.5%) !important; }
 
-  /* FAQ answer open/close easing */
-  .hh-faq-item[open] .hh-faq-answer {
-    animation: hhFaqOpen 380ms ease both;
-  }
-  @keyframes hhFaqOpen {
-    from { opacity: 0; transform: translateY(-4px); }
-    to   { opacity: 1; transform: none; }
-  }
+  .hh-faq-item[open] .hh-faq-answer { animation: hhFaqOpen 380ms ease both; }
+  @keyframes hhFaqOpen { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
 
-  /* Respect users who prefer reduced motion */
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .hh-reveal, .hh-reveal.is-visible { opacity: 1 !important; transform: none !important; transition: none !important; }
@@ -1407,13 +557,8 @@
     .hh-faq-item[open] .hh-faq-answer { animation: none !important; }
   }
 
-  /* ===== MOBILE ===== */
   @media (max-width: 820px) {
-    :root {
-      --pad-section-y: 80px;
-      --pad-section-x: 22px;
-      --gap-intro-content: 44px;
-    }
+    :root { --pad-section-y: 80px; --pad-section-x: 22px; --gap-intro-content: 44px; }
     .hh-h1 { font-size: 64px; }
     .hh-h2 { font-size: 44px; }
     .hh-hero { min-height: 560px; height: 86vh; }
@@ -1465,9 +610,6 @@
     .hh-pull { font-size: 22px; padding-left: 20px; }
     .hh-letter-sig-name { font-size: 24px; }
     .hh-way-title { font-size: 24px; }
-    .hh-form-card { padding: 40px 24px 34px; }
-    .hh-formula-row { flex-wrap: wrap; gap: 10px; }
-    .hh-formula-row input { flex: 1 1 100%; text-align: left; }
     .hh-faq-item summary { font-size: 19px; padding: 22px 4px; }
     .hh-final .hh-h2 { font-size: 54px; }
     .hh-final-lead { font-size: 19px; }
@@ -1475,82 +617,16 @@
     .hh-final .hh-btn-primary, .hh-final .hh-btn-secondary { padding: 18px 20px; font-size: 12px; }
   }
 
-  /* ===== FOOTER ===== */
-  .hh-footer {
-    background-color: var(--charcoal);
-    color: var(--cream);
-    padding: 72px 32px 48px;
-    border-top: 1px solid rgba(237, 226, 204, 0.12);
-    text-align: center;
-  }
-  .hh-footer-logo {
-    width: 150px;
-    height: auto;
-    margin: 0 auto 24px;
-    opacity: 0.95;
-    display: block;
-  }
-  .hh-footer-tagline {
-    font-family: 'Ascentis', Georgia, 'Times New Roman', serif;
-    font-size: 22px;
-    line-height: 1.5;
-    color: var(--cream);
-    opacity: 0.92;
-    max-width: 520px;
-    margin: 0 auto 26px;
-  }
-  .hh-footer-rule {
-    width: 48px;
-    height: 1px;
-    background-color: rgba(237, 226, 204, 0.35);
-    margin: 0 auto 26px;
-    border: 0;
-  }
-  .hh-footer-links {
-    font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--cream);
-    opacity: 0.82;
-    margin: 0 0 32px;
-    line-height: 2.4;
-  }
-  .hh-footer-links a {
-    color: var(--cream);
-    border-bottom: 1px solid rgba(237, 226, 204, 0.28);
-    padding-bottom: 3px;
-    transition: border-color 0.2s ease, color 0.2s ease;
-  }
-  .hh-footer-links a:hover {
-    border-bottom-color: var(--cream);
-  }
-  .hh-footer-sep {
-    margin: 0 14px;
-    opacity: 0.35;
-  }
-  .hh-footer-address {
-    font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--cream);
-    opacity: 0.5;
-    margin: 0 0 10px;
-    line-height: 1.7;
-  }
-  .hh-footer-copy {
-    font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--cream);
-    opacity: 0.4;
-    margin: 18px 0 0;
-  }
+  .hh-footer { background-color: var(--charcoal); color: var(--cream); padding: 72px 32px 48px; border-top: 1px solid rgba(237, 226, 204, 0.12); text-align: center; }
+  .hh-footer-logo { width: 150px; height: auto; margin: 0 auto 24px; opacity: 0.95; display: block; }
+  .hh-footer-tagline { font-family: 'Ascentis', Georgia, 'Times New Roman', serif; font-size: 22px; line-height: 1.5; color: var(--cream); opacity: 0.92; max-width: 520px; margin: 0 auto 26px; }
+  .hh-footer-rule { width: 48px; height: 1px; background-color: rgba(237, 226, 204, 0.35); margin: 0 auto 26px; border: 0; }
+  .hh-footer-links { font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--cream); opacity: 0.82; margin: 0 0 32px; line-height: 2.4; }
+  .hh-footer-links a { color: var(--cream); border-bottom: 1px solid rgba(237, 226, 204, 0.28); padding-bottom: 3px; transition: border-color 0.2s ease, color 0.2s ease; }
+  .hh-footer-links a:hover { border-bottom-color: var(--cream); }
+  .hh-footer-sep { margin: 0 14px; opacity: 0.35; }
+  .hh-footer-address { font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream); opacity: 0.5; margin: 0 0 10px; line-height: 1.7; }
+  .hh-footer-copy { font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--cream); opacity: 0.4; margin: 18px 0 0; }
   @media (max-width: 820px) {
     .hh-footer { padding: 56px 22px 40px; }
     .hh-footer-logo { width: 120px; margin-bottom: 20px; }
@@ -1565,114 +641,64 @@
 
 <body>
 
-  <!-- Fixed "Give Now" pin, visible on every scroll position -->
-  <a href="https://donate.overflow.co/fearless/cash?config=harvest-hands"
-     class="hh-give-pin"
-     target="_blank"
-     rel="noopener">Give Now</a>
+  <a href="https://donate.overflow.co/fearless/cash?config=harvest-hands" class="hh-give-pin" target="_blank" rel="noopener">Give Now</a>
 
-  <!-- 1. HERO ============================================== -->
   <section class="hh-hero" id="top">
-    <video
-      class="hh-hero-video"
-      autoplay muted loop playsinline preload="auto"
-      poster="assets/video/hero-flyover-poster.jpg">
-      <source src="assets/video/hero-flyover.mp4" type="video/mp4" />
+    <video class="hh-hero-video" autoplay muted loop playsinline preload="auto" poster="hero-flyover-poster.jpg">
+      <source src="hero-flyover.mp4" type="video/mp4" />
     </video>
     <div class="hh-hero-scrim"></div>
     <div class="hh-hero-grain"></div>
-
     <div class="hh-hero-content">
-      <img
-        src="assets/logos/FEARLESS LOGO.png"
-        alt="Fearless Church"
-        class="hh-hero-presenter-logo" />
+      <img src="FEARLESS LOGO.png" alt="Fearless Church" class="hh-hero-presenter-logo" />
       <div class="hh-hero-presents">Presents</div>
-      <img
-        src="assets/logos/HARVEST HANDS LOGO.png"
-        alt="Harvest Hands"
-        class="hh-hero-logo" />
+      <img src="HARVEST HANDS LOGO.png" alt="Harvest Hands" class="hh-hero-logo" />
       <div class="hh-hero-sub">A House for the Harvest</div>
-      <div class="hh-hero-window">Phase One &bull; April 26 – May 24 &bull; 5 Sundays &bull; $1.5M</div>
+      <div class="hh-hero-window">Phase One &bull; April 26 &ndash; May 24 &bull; 5 Sundays &bull; $1.5M</div>
       <div class="hh-btn-row">
         <a href="https://fearlessla.churchcenter.com/people/forms/1207280" class="hh-btn hh-btn-primary" target="_blank" rel="noopener">Make My Commitment</a>
         <a href="#vision" class="hh-btn hh-btn-secondary">Watch the Vision</a>
       </div>
     </div>
-
     <div class="hh-scroll-cue">Scroll</div>
   </section>
 
-  <!-- 2. VISION VIDEO (cream) ============================== -->
   <section id="vision" class="hh-section">
     <div class="hh-inner">
       <div class="hh-intro">
         <div class="hh-eyebrow">A Word From Pastor Jeremy</div>
         <h2 class="hh-display hh-h2">Hear the Vision.</h2>
-        <p class="hh-body hh-lead">
-          Hear what God has put on our hearts and the first steps He is calling us toward as we move into this new season.
-        </p>
+        <p class="hh-body hh-lead">Hear what God has put on our hearts and the first steps He is calling us toward as we move into this new season.</p>
       </div>
       <div class="hh-video-player" data-yt-id="eCGSNeNXF5c">
-        <img
-          class="hh-video-thumb"
-          src="https://img.youtube.com/vi/eCGSNeNXF5c/maxresdefault.jpg"
-          alt="Pastor Jeremy casting the vision for Harvest Hands"
-          loading="lazy" />
+        <img class="hh-video-thumb" src="https://img.youtube.com/vi/eCGSNeNXF5c/maxresdefault.jpg" alt="Pastor Jeremy casting the vision for Harvest Hands" loading="lazy" />
         <button class="hh-video-play" type="button" aria-label="Play video">
-          <svg viewBox="0 0 18 20" fill="currentColor" aria-hidden="true">
-            <path d="M18 10L0 20V0z"/>
-          </svg>
+          <svg viewBox="0 0 18 20" fill="currentColor" aria-hidden="true"><path d="M18 10L0 20V0z"/></svg>
         </button>
       </div>
     </div>
   </section>
 
-  <!-- 3. SCRIPTURE (photo bg) ============================== -->
-  <section class="hh-section hh-section--photo hh-scripture"
-           style="background-image: url('assets/photos/scripture-bg.jpg');">
+  <section class="hh-section hh-section--photo hh-scripture" style="background-image: url('scripture-bg.jpg');">
     <div class="hh-inner">
       <div class="hh-ornament">&bull; &bull; &bull;</div>
-      <p class="hh-scripture-quote">
-        &ldquo;Go up to the mountain, bring wood and build the house, that I may take pleasure in it and be glorified.&rdquo;
-      </p>
+      <p class="hh-scripture-quote">&ldquo;Go up to the mountain, bring wood and build the house, that I may take pleasure in it and be glorified.&rdquo;</p>
       <div class="hh-scripture-ref">Haggai 1:8</div>
     </div>
   </section>
 
-  <!-- 4. LETTER FROM THE PASTORS (cream, with photo) ======= -->
   <section class="hh-section">
     <div class="hh-inner">
       <div class="hh-letter-layout">
-        <figure
-          class="hh-letter-photo"
-          role="img"
-          aria-label="Pastors Jeremy and Christy Johnson"
-          style="background-image: url('assets/photos/johnsons.jpg'); margin: 0;">
-        </figure>
-
+        <figure class="hh-letter-photo" role="img" aria-label="Pastors Jeremy and Christy Johnson" style="background-image: url('johnsons.jpg'); margin: 0;"></figure>
         <div class="hh-letter-content">
           <div class="hh-eyebrow">A Letter From Your Pastors</div>
           <div class="hh-letter-greeting">Fearless family,</div>
-
-          <p>
-            We are entering a new season at Fearless Church, and we believe with everything in us that God is opening a door only He could open.
-          </p>
-          <p>
-            For years we have prayed for a home. A place for the harvest to be gathered, for kids to grow, for marriages to be restored, for the next generation to encounter the love of Jesus. <strong>We believe that home is now within reach.</strong>
-          </p>
-
-          <div class="hh-pull">
-            This is a moment we are stepping into by faith. The door is in front of us. The equity is in the miracle. And we believe God is inviting His house to rise up and build with Him.
-          </div>
-
-          <p>
-            Harvest Hands is not a campaign about a building. It is about what God will do in and through that building for the next 100 years in Los Angeles. Every gift, every pledge, every act of faith from this family is going to be used by God to write the next chapter of Fearless.
-          </p>
-          <p>
-            Pray with us. Believe with us. And when God speaks, please obey. We are running toward this together.
-          </p>
-
+          <p>We are entering a new season at Fearless Church, and we believe with everything in us that God is opening a door only He could open.</p>
+          <p>For years we have prayed for a home. A place for the harvest to be gathered, for kids to grow, for marriages to be restored, for the next generation to encounter the love of Jesus. <strong>We believe that home is now within reach.</strong></p>
+          <div class="hh-pull">This is a moment we are stepping into by faith. The door is in front of us. The equity is in the miracle. And we believe God is inviting His house to rise up and build with Him.</div>
+          <p>Harvest Hands is not a campaign about a building. It is about what God will do in and through that building for the next 100 years in Los Angeles. Every gift, every pledge, every act of faith from this family is going to be used by God to write the next chapter of Fearless.</p>
+          <p>Pray with us. Believe with us. And when God speaks, please obey. We are running toward this together.</p>
           <div class="hh-letter-sig">
             <div class="hh-letter-sig-name">Pastors Jeremy &amp; Christy Johnson</div>
             <div class="hh-letter-sig-role">Lead Pastors // Fearless Church</div>
@@ -1682,7 +708,6 @@
     </div>
   </section>
 
-  <!-- 5. TWO PHASES (dark) ================================= -->
   <section class="hh-section hh-section--dark">
     <div class="hh-inner">
       <div class="hh-intro">
@@ -1690,29 +715,23 @@
         <h2 class="hh-display hh-h2">A House for the Harvest.</h2>
         <p class="hh-callout hh-lead">Together, we are believing God for <strong>$3,000,000</strong>.</p>
       </div>
-
       <div class="hh-phase-grid">
         <div class="hh-phase-card">
           <div class="hh-phase-num">Phase One</div>
           <div class="hh-phase-title">Possess the Promise</div>
           <div class="hh-phase-amount">$1,500,000</div>
-          <p class="hh-phase-desc">
-            Securing the building God has placed in front of us. The down payment, the deposits, the deal closure. This is the moment we walk through the door He has opened.
-          </p>
+          <p class="hh-phase-desc">Securing the building God has placed in front of us. The down payment, the deposits, the deal closure. This is the moment we walk through the door He has opened.</p>
         </div>
         <div class="hh-phase-card">
           <div class="hh-phase-num">Phase Two</div>
           <div class="hh-phase-title">Prepare the House</div>
           <div class="hh-phase-amount">$1,500,000</div>
-          <p class="hh-phase-desc">
-            Building out a sanctuary, kids&rsquo; spaces, and a gathering place ready for everything God is sending. From bare walls to a home built for the harvest.
-          </p>
+          <p class="hh-phase-desc">Building out a sanctuary, kids&rsquo; spaces, and a gathering place ready for everything God is sending. From bare walls to a home built for the harvest.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 6. PROGRESS (cream) ================================== -->
   <section class="hh-section hh-progress" id="progress">
     <div class="hh-inner">
       <div class="hh-intro">
@@ -1726,8 +745,8 @@
         </div>
       </div>
       <div class="hh-thermo-phases">
-        <div class="hh-thermo-phase">First Step Through the Door<span>Phase One · $1.5M</span></div>
-        <div class="hh-thermo-phase">Finish the Project<span>Phase Two · $3M</span></div>
+        <div class="hh-thermo-phase">First Step Through the Door<span>Phase One &middot; $1.5M</span></div>
+        <div class="hh-thermo-phase">Finish the Project<span>Phase Two &middot; $3M</span></div>
       </div>
       <div class="hh-thermo" data-raised="255000" data-goal="3000000" aria-label="Campaign progress">
         <div class="hh-thermo-fill" style="width: 8.5%;"></div>
@@ -1741,139 +760,66 @@
     </div>
   </section>
 
-  <!-- 7. RENDERS GALLERY (dark) ============================ -->
   <section class="hh-section hh-section--dark" id="renders">
     <div class="hh-inner">
       <div class="hh-intro">
         <div class="hh-eyebrow">What We Are Building</div>
         <h2 class="hh-display hh-h2">See the House.</h2>
-        <p class="hh-body hh-lead">
-          Renders of what God is building through our family. What you see here is not a dream. It is the house the Lord has set in front of us, and we are running toward it together.
-        </p>
+        <p class="hh-body hh-lead">Renders of what God is building through our family. What you see here is not a dream. It is the house the Lord has set in front of us, and we are running toward it together.</p>
       </div>
-
-      <div
-        class="hh-render-hero"
-        role="img"
-        aria-label="Exterior render of the Harvest Hands building"
-        style="background-image: url('assets/photos/exterior.jpg');">
-      </div>
-
+      <div class="hh-render-hero" role="img" aria-label="Exterior render of the Harvest Hands building" style="background-image: url('exterior.jpg');"></div>
       <div class="hh-render-grid">
-        <figure class="hh-render">
-          <div
-            class="hh-render-img"
-            role="img"
-            aria-label="Sanctuary render"
-            style="background-image: url('assets/photos/sanctuary.jpg');">
-          </div>
-        </figure>
-
-        <figure class="hh-render">
-          <div
-            class="hh-render-img"
-            role="img"
-            aria-label="Studio render"
-            style="background-image: url('assets/photos/studio.jpg');">
-          </div>
-        </figure>
-
-        <figure class="hh-render">
-          <div
-            class="hh-render-img"
-            role="img"
-            aria-label="Kids spaces render"
-            style="background-image: url('assets/photos/kidz.jpg');">
-          </div>
-        </figure>
+        <figure class="hh-render"><div class="hh-render-img" role="img" aria-label="Sanctuary render" style="background-image: url('sanctuary.jpg');"></div></figure>
+        <figure class="hh-render"><div class="hh-render-img" role="img" aria-label="Studio render" style="background-image: url('studio.jpg');"></div></figure>
+        <figure class="hh-render"><div class="hh-render-img" role="img" aria-label="Kids spaces render" style="background-image: url('kidz.jpg');"></div></figure>
       </div>
     </div>
   </section>
 
-  <!-- 8. HISTORY OF THE BUILDING (cream) ==================== -->
   <section class="hh-section" id="history">
     <div class="hh-inner">
       <div class="hh-intro">
         <div class="hh-eyebrow">History of the Building</div>
         <h2 class="hh-display hh-h2">Ninety years of entertainment. Ready for its next chapter.</h2>
-        <p class="hh-body hh-lead">
-          6230 W Sunset Blvd has held some of the most significant moments in Hollywood history. Now God is writing the next chapter, and the harvest is the story.
-        </p>
+        <p class="hh-body hh-lead">6230 W Sunset Blvd has held some of the most significant moments in Hollywood history. Now God is writing the next chapter, and the harvest is the story.</p>
       </div>
-
       <div class="hh-history-grid">
         <div class="hh-history-card">
-          <div
-            class="hh-history-photo"
-            role="img"
-            aria-label="Earl Carroll Theatre exterior, 1942"
-            style="background-image: url('assets/photos/history/earl_carroll_1938.jpg');">
-          </div>
+          <div class="hh-history-photo" role="img" aria-label="Earl Carroll Theatre exterior, 1942" style="background-image: url('earl_carroll_1938.jpg');"></div>
           <div class="hh-history-year">1938</div>
           <div class="hh-history-title">Earl Carroll Theatre</div>
-          <p class="hh-history-desc">
-            A 1,000-seat &ldquo;entertainment palace&rdquo; with a 60-foot revolving stage opens Dec 26, 1938. Walter Winchell dubs it the &ldquo;Most Beautiful Girls in the World&rdquo; theatre.
-          </p>
+          <p class="hh-history-desc">A 1,000-seat &ldquo;entertainment palace&rdquo; with a 60-foot revolving stage opens Dec 26, 1938. Walter Winchell dubs it the &ldquo;Most Beautiful Girls in the World&rdquo; theatre.</p>
         </div>
-
         <div class="hh-history-card">
-          <div
-            class="hh-history-photo"
-            role="img"
-            aria-label="Earl Carroll Theatre postcard from the mid-1940s"
-            style="background-image: url('assets/photos/history/postcard_1946.jpg');">
-          </div>
+          <div class="hh-history-photo" role="img" aria-label="Earl Carroll Theatre postcard from the mid-1940s" style="background-image: url('postcard_1946.jpg');"></div>
           <div class="hh-history-year">1950s &ndash; 60s</div>
           <div class="hh-history-title">Moulin Rouge &amp; Aquarius</div>
-          <p class="hh-history-desc">
-            Nightclub hosting Frank Sinatra, Ella Fitzgerald, and Nat King Cole. Later home of the rock musical Hair in Hollywood.
-          </p>
+          <p class="hh-history-desc">Nightclub hosting Frank Sinatra, Ella Fitzgerald, and Nat King Cole. Later home of the rock musical Hair in Hollywood.</p>
         </div>
-
         <div class="hh-history-card">
-          <div
-            class="hh-history-photo"
-            role="img"
-            aria-label="The building as Nickelodeon on Sunset, 2011"
-            style="background-image: url('assets/photos/history/nickelodeon_sunset.jpg');">
-          </div>
+          <div class="hh-history-photo" role="img" aria-label="The building as Nickelodeon on Sunset, 2011" style="background-image: url('nickelodeon_sunset.jpg');"></div>
           <div class="hh-history-year">1997 &ndash; 2020</div>
           <div class="hh-history-title">Nickelodeon on Sunset</div>
-          <p class="hh-history-desc">
-            West Coast production hub for Nickelodeon. Taping of All That, Kenan &amp; Kel, The Amanda Show, iCarly, Big Time Rush, and Victorious.
-          </p>
+          <p class="hh-history-desc">West Coast production hub for Nickelodeon. Taping of All That, Kenan &amp; Kel, The Amanda Show, iCarly, Big Time Rush, and Victorious.</p>
         </div>
-
         <div class="hh-history-card">
-          <div
-            class="hh-history-photo"
-            role="img"
-            aria-label="Earl Carroll Theatre building today"
-            style="background-image: url('assets/photos/history/restored_2015.jpg');">
-          </div>
+          <div class="hh-history-photo" role="img" aria-label="Earl Carroll Theatre building today" style="background-image: url('restored_2015.jpg');"></div>
           <div class="hh-history-year">2022 &ndash; Now</div>
           <div class="hh-history-title">Restoration &amp; For Sale</div>
-          <p class="hh-history-desc">
-            Art Deco marquee and neon restored. Designated a Historic-Cultural Monument. Listed at $12.75M. The door opens for God&rsquo;s house.
-          </p>
+          <p class="hh-history-desc">Art Deco marquee and neon restored. Designated a Historic-Cultural Monument. Listed at $12.75M. The door opens for God&rsquo;s house.</p>
         </div>
       </div>
-
       <p class="hh-history-sources">Sources: LA Historic Theatre Foundation &nbsp;&bull;&nbsp; LA Conservancy &nbsp;&bull;&nbsp; Wikimedia Commons</p>
     </div>
   </section>
 
-  <!-- 9. FOUR WAVES OF REVIVAL (dark) ======================= -->
   <section class="hh-section hh-section--dark" id="revival">
     <div class="hh-inner">
       <div class="hh-intro">
         <div class="hh-eyebrow">A City God Keeps Returning To</div>
         <h2 class="hh-display hh-h2">Four Waves of Revival in LA.</h2>
-        <p class="hh-body hh-lead">
-          Each one shaped the global Church. Each one moved within miles of 6230 W Sunset Blvd. We believe God is writing another chapter, and this house sits right in the middle of it.
-        </p>
+        <p class="hh-body hh-lead">Each one shaped the global Church. Each one moved within miles of 6230 W Sunset Blvd. We believe God is writing another chapter, and this house sits right in the middle of it.</p>
       </div>
-
       <div class="hh-revival-grid">
         <div class="hh-revival-card">
           <div class="hh-revival-year">1906</div>
@@ -1881,125 +827,67 @@
             <div class="hh-revival-title">Azusa Street Revival</div>
             <div class="hh-revival-distance">3.8 Miles from 6230 Sunset</div>
           </div>
-          <p class="hh-revival-desc">
-            Led by William J. Seymour at 312 Azusa St. Three years of continuous revival. Crowds of 300 to 1,500 daily. Birthplace of global Pentecostalism, now 600M+ adherents worldwide.
-          </p>
+          <p class="hh-revival-desc">Led by William J. Seymour at 312 Azusa St. Three years of continuous revival. Crowds of 300 to 1,500 daily. Birthplace of global Pentecostalism, now 600M+ adherents worldwide.</p>
         </div>
-
         <div class="hh-revival-card">
           <div class="hh-revival-year">1923</div>
           <div class="hh-revival-meta">
             <div class="hh-revival-title">Aimee Semple McPherson &bull; Angelus Temple</div>
             <div class="hh-revival-distance">3.1 Miles from 6230 Sunset</div>
           </div>
-          <p class="hh-revival-desc">
-            America&rsquo;s first megachurch opens in Echo Park. 5,300-seat auditorium, &ldquo;continuous revival.&rdquo; Birth of the Foursquare Church. Weekly attendance reached 10,000 in the 1920s.
-          </p>
+          <p class="hh-revival-desc">America&rsquo;s first megachurch opens in Echo Park. 5,300-seat auditorium, &ldquo;continuous revival.&rdquo; Birth of the Foursquare Church. Weekly attendance reached 10,000 in the 1920s.</p>
         </div>
-
         <div class="hh-revival-card">
           <div class="hh-revival-year">1930s</div>
           <div class="hh-revival-meta">
             <div class="hh-revival-title">Henrietta Mears &bull; Hollywood First Pres.</div>
             <div class="hh-revival-distance">0.4 Miles from 6230 Sunset</div>
           </div>
-          <p class="hh-revival-desc">
-            Grew the Sunday School from 450 to 6,500. Discipled Billy Graham, Bill Bright (Campus Crusade / CRU), and 400+ who entered ministry. Hollywood Christian Group reached TV and film stars.
-          </p>
+          <p class="hh-revival-desc">Grew the Sunday School from 450 to 6,500. Discipled Billy Graham, Bill Bright (Campus Crusade / CRU), and 400+ who entered ministry. Hollywood Christian Group reached TV and film stars.</p>
         </div>
-
         <div class="hh-revival-card">
           <div class="hh-revival-year">1967</div>
           <div class="hh-revival-meta">
             <div class="hh-revival-title">The Jesus People Movement</div>
             <div class="hh-revival-distance">LA / SoCal Epicenter</div>
           </div>
-          <p class="hh-revival-desc">
-            Hippie revival born from LA&rsquo;s counterculture. Chuck Smith&rsquo;s Calvary Chapel baptized hundreds monthly. The Hollywood Free Paper. Gave birth to modern worship music and contemporary Christian culture.
-          </p>
+          <p class="hh-revival-desc">Hippie revival born from LA&rsquo;s counterculture. Chuck Smith&rsquo;s Calvary Chapel baptized hundreds monthly. The Hollywood Free Paper. Gave birth to modern worship music and contemporary Christian culture.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 10. THE MODEL / FIVE REVENUE STREAMS (cream) ========== -->
   <section class="hh-section" id="model">
     <div class="hh-inner">
       <div class="hh-intro">
         <div class="hh-eyebrow">The Model</div>
         <h2 class="hh-display hh-h2">A building that pays for the mission it holds.</h2>
-        <p class="hh-body hh-lead">
-          6230 Sunset is not just a sanctuary. It is a self-sustaining engine for the Gospel in Hollywood. Five revenue streams under one roof, designed to fund the mission for the next hundred years.
-        </p>
+        <p class="hh-body hh-lead">6230 Sunset is not just a sanctuary. It is a self-sustaining engine for the Gospel in Hollywood. Five revenue streams under one roof, designed to fund the mission for the next hundred years.</p>
       </div>
-
       <div class="hh-streams-grid">
-        <div class="hh-stream-card">
-          <div class="hh-stream-num">01</div>
-          <div class="hh-stream-title">Event Center</div>
-          <div class="hh-stream-size">~20,000 sq ft</div>
-          <div class="hh-stream-range-label">Annual Range</div>
-          <div class="hh-stream-range">$700K &ndash; $2.2M</div>
-        </div>
-        <div class="hh-stream-card">
-          <div class="hh-stream-num">02</div>
-          <div class="hh-stream-title">Coffee Shop</div>
-          <div class="hh-stream-size">~1,200 sq ft</div>
-          <div class="hh-stream-range-label">Annual Range</div>
-          <div class="hh-stream-range">$600K &ndash; $1.5M</div>
-        </div>
-        <div class="hh-stream-card">
-          <div class="hh-stream-num">03</div>
-          <div class="hh-stream-title">Coworking</div>
-          <div class="hh-stream-size">~8,000 sq ft</div>
-          <div class="hh-stream-range-label">Annual Range</div>
-          <div class="hh-stream-range">$250K &ndash; $600K</div>
-        </div>
-        <div class="hh-stream-card">
-          <div class="hh-stream-num">04</div>
-          <div class="hh-stream-title">Recording Studio</div>
-          <div class="hh-stream-size">~2,500 sq ft</div>
-          <div class="hh-stream-range-label">Annual Range</div>
-          <div class="hh-stream-range">$120K &ndash; $400K</div>
-        </div>
-        <div class="hh-stream-card">
-          <div class="hh-stream-num">05</div>
-          <div class="hh-stream-title">Podcast Studio</div>
-          <div class="hh-stream-size">~1,500 sq ft</div>
-          <div class="hh-stream-range-label">Annual Range</div>
-          <div class="hh-stream-range">$80K &ndash; $300K</div>
-        </div>
+        <div class="hh-stream-card"><div class="hh-stream-num">01</div><div class="hh-stream-title">Event Center</div><div class="hh-stream-size">~20,000 sq ft</div><div class="hh-stream-range-label">Annual Range</div><div class="hh-stream-range">$700K &ndash; $2.2M</div></div>
+        <div class="hh-stream-card"><div class="hh-stream-num">02</div><div class="hh-stream-title">Coffee Shop</div><div class="hh-stream-size">~1,200 sq ft</div><div class="hh-stream-range-label">Annual Range</div><div class="hh-stream-range">$600K &ndash; $1.5M</div></div>
+        <div class="hh-stream-card"><div class="hh-stream-num">03</div><div class="hh-stream-title">Coworking</div><div class="hh-stream-size">~8,000 sq ft</div><div class="hh-stream-range-label">Annual Range</div><div class="hh-stream-range">$250K &ndash; $600K</div></div>
+        <div class="hh-stream-card"><div class="hh-stream-num">04</div><div class="hh-stream-title">Recording Studio</div><div class="hh-stream-size">~2,500 sq ft</div><div class="hh-stream-range-label">Annual Range</div><div class="hh-stream-range">$120K &ndash; $400K</div></div>
+        <div class="hh-stream-card"><div class="hh-stream-num">05</div><div class="hh-stream-title">Podcast Studio</div><div class="hh-stream-size">~1,500 sq ft</div><div class="hh-stream-range-label">Annual Range</div><div class="hh-stream-range">$80K &ndash; $300K</div></div>
       </div>
-
       <div class="hh-streams-total">
         <div class="hh-streams-total-label">Combined Annual Revenue Target</div>
         <div class="hh-streams-total-amount">$1.75M &ndash; $5.0M</div>
       </div>
-
       <p class="hh-address-line">6230 W Sunset Blvd &nbsp;&bull;&nbsp; <strong>Hollywood, California</strong></p>
     </div>
   </section>
 
-  <!-- 11. TIER LADDER (dark) =============================== -->
   <section class="hh-section hh-section--dark" id="tiers">
     <div class="hh-inner">
       <div class="hh-intro">
         <div class="hh-eyebrow">One-Year Gift Ladder</div>
         <h2 class="hh-display hh-h2">Everybody Can Do Something.</h2>
-        <p class="hh-body hh-lead">
-          Here is what it looks like when our Fearless family stretches together. Not equal gifts. Equal sacrifice. Find the row that looks like faith for your family.
-        </p>
+        <p class="hh-body hh-lead">Here is what it looks like when our Fearless family stretches together. Not equal gifts. Equal sacrifice. Find the row that looks like faith for your family.</p>
       </div>
-
       <table class="hh-tier-table">
-        <thead>
-          <tr>
-            <th class="hh-num-col">Gifts Needed</th>
-            <th>1-Year Gift</th>
-            <th>Monthly</th>
-            <th>Level Total</th>
-          </tr>
-        </thead>
+        <thead><tr><th class="hh-num-col">Gifts Needed</th><th>1-Year Gift</th><th>Monthly</th><th>Level Total</th></tr></thead>
         <tbody>
           <tr><td class="hh-tier-count">1</td><td class="hh-tier-gift">$500,000</td><td class="hh-tier-monthly">$41,667 / mo</td><td class="hh-tier-monthly">$500,000</td></tr>
           <tr><td class="hh-tier-count">2</td><td class="hh-tier-gift">$250,000</td><td class="hh-tier-monthly">$20,833 / mo</td><td class="hh-tier-monthly">$500,000</td></tr>
@@ -2012,210 +900,104 @@
           <tr class="hh-tier-total"><td colspan="2">Total Harvest Hands Vision</td><td colspan="2" class="hh-tier-gift">$3,000,000</td></tr>
         </tbody>
       </table>
-
-      <p class="hh-tier-caption">
-        Pray about it. Ask God where you fit on this ladder. Then take the step of faith.
-      </p>
+      <p class="hh-tier-caption">Pray about it. Ask God where you fit on this ladder. Then take the step of faith.</p>
     </div>
   </section>
 
-  <!-- 12. TWO WAYS TO GIVE (cream) ========================== -->
   <section class="hh-section" id="lanes">
     <div class="hh-inner">
       <div class="hh-intro">
-        <div class="hh-eyebrow">Phase One &bull; April 26 – May 24</div>
+        <div class="hh-eyebrow">Phase One &bull; April 26 &ndash; May 24</div>
         <h2 class="hh-display hh-h2">Two Ways to Give.</h2>
-        <p class="hh-body hh-lead">
-          These are two separate, distinct ways to say yes. You can do one. You can do both. Pray about what God is asking of your family and step in.
-        </p>
+        <p class="hh-body hh-lead">These are two separate, distinct ways to say yes. You can do one. You can do both. Pray about what God is asking of your family and step in.</p>
       </div>
-
       <div class="hh-lanes-grid">
         <div class="hh-lane">
           <div class="hh-lane-num">01</div>
           <div class="hh-lane-label">Way One &bull; Starts Sunday, April 26</div>
           <div class="hh-lane-title">One-Time Gift</div>
           <p class="hh-lane-quote">&ldquo;Some of you can bring your seed now.&rdquo;</p>
-          <p class="hh-lane-body">
-            <strong>This is actual giving, not a pledge or an IOU.</strong> A one-time gift moves real dollars into the campaign right now. You can bring your first gift this Sunday, and you can give once or several times across the 5-Sunday window (April 26 &ndash; May 24). God has already put it in your hand. Plant the seed and watch the ground move.
-          </p>
-          <a href="https://donate.overflow.co/fearless/cash?config=harvest-hands"
-             class="hh-btn hh-btn-primary hh-lane-cta"
-             target="_blank" rel="noopener">Give Now</a>
+          <p class="hh-lane-body"><strong>This is actual giving, not a pledge or an IOU.</strong> A one-time gift moves real dollars into the campaign right now. You can bring your first gift this Sunday, and you can give once or several times across the 5-Sunday window (April 26 &ndash; May 24). God has already put it in your hand. Plant the seed and watch the ground move.</p>
+          <a href="https://donate.overflow.co/fearless/cash?config=harvest-hands" class="hh-btn hh-btn-primary hh-lane-cta" target="_blank" rel="noopener">Give Now</a>
         </div>
-
         <div class="hh-lane">
           <div class="hh-lane-num">02</div>
           <div class="hh-lane-label">Way Two &bull; Monthly for 12 Months</div>
           <div class="hh-lane-title">12-Month Faith Commitment</div>
           <p class="hh-lane-quote">&ldquo;Some of you may not be able to give it all today, but you can make a faith commitment over the next 12 months.&rdquo;</p>
-          <p class="hh-lane-body">
-            <strong>This is ongoing monthly giving across a full year.</strong> You tell God what you are believing Him for, and then you give toward it month by month. It is a faith commitment, not a contract. Your monthly giving fuels the move of God in this house over the long haul.
-          </p>
-          <a href="https://fearlessla.churchcenter.com/people/forms/1207280"
-             class="hh-btn hh-btn-primary hh-lane-cta"
-             target="_blank" rel="noopener">Make My Commitment</a>
+          <p class="hh-lane-body"><strong>This is ongoing monthly giving across a full year.</strong> You tell God what you are believing Him for, and then you give toward it month by month. It is a faith commitment, not a contract. Your monthly giving fuels the move of God in this house over the long haul.</p>
+          <a href="https://fearlessla.churchcenter.com/people/forms/1207280" class="hh-btn hh-btn-primary hh-lane-cta" target="_blank" rel="noopener">Make My Commitment</a>
         </div>
       </div>
-
-      <p class="hh-lanes-footnote">
-        Giving stock, real estate, IRA, or a major gift? See <a href="#ways">Creative Giving</a> below. Our team will walk you through every step.
-      </p>
+      <p class="hh-lanes-footnote">Giving stock, real estate, IRA, or a major gift? See <a href="#ways">Creative Giving</a> below. Our team will walk you through every step.</p>
     </div>
   </section>
 
-  <!-- 13. WAYS TO GIVE (dark) ============================== -->
   <section class="hh-section hh-section--dark" id="ways">
     <div class="hh-inner">
       <div class="hh-intro">
         <div class="hh-eyebrow">How to Actually Give</div>
         <h2 class="hh-display hh-h2">Every Gift Builds the House.</h2>
-        <p class="hh-body hh-lead">
-          Whether you are bringing a one-time gift or starting your 12-month commitment, here is how to move it. Online, by check, or through creative giving.
-        </p>
+        <p class="hh-body hh-lead">Whether you are bringing a one-time gift or starting your 12-month commitment, here is how to move it. Online, by check, or through creative giving.</p>
       </div>
-
       <div class="hh-ways-grid">
         <div class="hh-way">
           <div class="hh-way-label">Online</div>
           <div class="hh-way-title">Give Online</div>
-          <p class="hh-way-detail">
-            One-time or recurring gifts, designated to <strong>Harvest Hands</strong>. Fast, secure, mobile-friendly.
-          </p>
-          <a href="https://donate.overflow.co/fearless/cash?config=harvest-hands"
-             class="hh-btn hh-btn-primary"
-             target="_blank" rel="noopener">Give</a>
+          <p class="hh-way-detail">One-time or recurring gifts, designated to <strong>Harvest Hands</strong>. Fast, secure, mobile-friendly.</p>
+          <a href="https://donate.overflow.co/fearless/cash?config=harvest-hands" class="hh-btn hh-btn-primary" target="_blank" rel="noopener">Give</a>
         </div>
         <div class="hh-way">
           <div class="hh-way-label">By Check</div>
           <div class="hh-way-title">Mail a Check</div>
-          <p class="hh-way-detail">
-            Make checks payable to <strong>Fearless Church</strong> with &ldquo;Harvest Hands&rdquo; in the memo line.<br/>
-            22922 Los Alisos Blvd., Ste K-361<br/>
-            Mission Viejo, CA 92691
-          </p>
+          <p class="hh-way-detail">Make checks payable to <strong>Fearless Church</strong> with &ldquo;Harvest Hands&rdquo; in the memo line.<br/>22922 Los Alisos Blvd., Ste K-361<br/>Mission Viejo, CA 92691</p>
         </div>
         <div class="hh-way">
           <div class="hh-way-label">Stock &amp; Other</div>
           <div class="hh-way-title">Creative Giving</div>
-          <p class="hh-way-detail">
-            Stock, real estate, IRA, or estate gifts. Our team will walk you through every step.
-          </p>
-          <a href="https://donate.overflow.co/fearless/stock/select-flow"
-             class="hh-btn hh-btn-primary"
-             target="_blank" rel="noopener">Give</a>
+          <p class="hh-way-detail">Stock, real estate, IRA, or estate gifts. Our team will walk you through every step.</p>
+          <a href="https://donate.overflow.co/fearless/stock/select-flow" class="hh-btn hh-btn-primary" target="_blank" rel="noopener">Give</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 14. PLEDGE FORM (cream) ============================== -->
   <section class="hh-section" id="pledge">
     <div class="hh-inner">
       <div class="hh-intro">
         <div class="hh-eyebrow">Make Your Commitment</div>
         <h2 class="hh-display hh-h2">Say Yes With Us.</h2>
-        <p class="hh-body hh-lead">
-          You are one yes away from helping build the house. The commitment form is where you tell us what you are believing God for: a one-time gift, a 12-month monthly commitment, or both. It is a faith commitment, not a contract. We will walk the next 12 months with you.
-        </p>
+        <p class="hh-body hh-lead">You are one yes away from helping build the house. The commitment form is where you tell us what you are believing God for: a one-time gift, a 12-month monthly commitment, or both. It is a faith commitment, not a contract. We will walk the next 12 months with you.</p>
       </div>
-
       <div class="hh-cta-card">
-        <a href="https://fearlessla.churchcenter.com/people/forms/1207280"
-           class="hh-btn hh-btn-primary hh-btn-jumbo"
-           target="_blank" rel="noopener">Make My Commitment</a>
+        <a href="https://fearlessla.churchcenter.com/people/forms/1207280" class="hh-btn hh-btn-primary hh-btn-jumbo" target="_blank" rel="noopener">Make My Commitment</a>
         <p class="hh-cta-note">Takes about two minutes. Secured by Planning Center.</p>
       </div>
     </div>
   </section>
 
-  <!-- 15. FAQ (dark) ======================================= -->
   <section class="hh-section hh-section--dark">
     <div class="hh-narrow">
       <div class="hh-intro">
         <div class="hh-eyebrow">Frequently Asked</div>
         <h2 class="hh-display hh-h2">Common Questions.</h2>
       </div>
-
       <div class="hh-faq-list">
-        <details class="hh-faq-item">
-          <summary>What is Harvest Hands?</summary>
-          <div class="hh-faq-answer">
-            Harvest Hands is a $3,000,000 building campaign to secure and prepare a permanent home for Fearless Church. It is a faith-fueled, two-phase initiative: Phase One ($1.5M) covers possessing the building, and Phase Two ($1.5M) covers preparing it for ministry.
-          </div>
-        </details>
-
-        <details class="hh-faq-item">
-          <summary>When is the Phase One giving window?</summary>
-          <div class="hh-faq-answer">
-            Phase One runs for 5 Sundays: <strong>Sunday, April 26 through Pentecost Sunday, May 24.</strong> Our Phase One goal is <strong>$1.5M</strong>, and we are believing God to possess the promise in this window.
-          </div>
-        </details>
-
-        <details class="hh-faq-item">
-          <summary>What are the two ways to give?</summary>
-          <div class="hh-faq-answer">
-            There are two separate, distinct ways to say yes, and you can do one or both.<br/><br/>
-            <strong>1. A one-time gift.</strong> This is actual giving, not a pledge or an IOU. Real dollars move into the campaign the moment you give. You can bring your first gift this Sunday, April 26, and give one or multiple times across the 5-Sunday window.<br/><br/>
-            <strong>2. A 12-month faith commitment.</strong> This is ongoing monthly giving across a full year. You tell God what you are believing Him for, and you give toward it month by month.
-          </div>
-        </details>
-
-        <details class="hh-faq-item">
-          <summary>How long is the faith commitment?</summary>
-          <div class="hh-faq-answer">
-            The faith commitment is a <strong>12-month</strong> window. You can fulfill it weekly, monthly, or in lump sums based on what works for your family.
-          </div>
-        </details>
-
-        <details class="hh-faq-item">
-          <summary>Is my pledge in addition to my regular tithe?</summary>
-          <div class="hh-faq-answer">
-            Yes. Harvest Hands is intended to be a sacrificial offering above and beyond your regular tithes and offerings, so the day-to-day ministry of Fearless can keep moving forward while we build for the future.
-          </div>
-        </details>
-
-        <details class="hh-faq-item">
-          <summary>What if my financial situation changes?</summary>
-          <div class="hh-faq-answer">
-            Your pledge is a faith commitment, not a contract. If your situation changes, simply reach out to our team and we will adjust together. We trust God and we trust you.
-          </div>
-        </details>
-
-        <details class="hh-faq-item">
-          <summary>Are gifts tax deductible?</summary>
-          <div class="hh-faq-answer">
-            Yes. Fearless Church is a registered 501(c)(3), and all gifts to Harvest Hands are tax deductible to the fullest extent allowed by law. You will receive a year-end giving statement.
-          </div>
-        </details>
-
-        <details class="hh-faq-item">
-          <summary>Where exactly does my gift go?</summary>
-          <div class="hh-faq-answer">
-            One hundred percent of every gift designated to Harvest Hands goes directly to the building campaign. None of it covers operational expenses or staff salaries.
-          </div>
-        </details>
-
-        <details class="hh-faq-item">
-          <summary>Can I give from stock, an IRA, or my estate?</summary>
-          <div class="hh-faq-answer">
-            Absolutely. We welcome creative giving including appreciated stock, IRA qualified charitable distributions, donor-advised funds, real estate, and planned/estate gifts. Click the <strong>Give</strong> button in the Creative Giving section above and our team will walk you through every step.
-          </div>
-        </details>
-
-        <details class="hh-faq-item">
-          <summary>How do I stay updated on what God is doing?</summary>
-          <div class="hh-faq-answer">
-            We will share regular updates by email and from the platform on Sundays. Make sure you are on the Fearless email list and following @fearless_la so you do not miss a single milestone.
-          </div>
-        </details>
+        <details class="hh-faq-item"><summary>What is Harvest Hands?</summary><div class="hh-faq-answer">Harvest Hands is a $3,000,000 building campaign to secure and prepare a permanent home for Fearless Church. It is a faith-fueled, two-phase initiative: Phase One ($1.5M) covers possessing the building, and Phase Two ($1.5M) covers preparing it for ministry.</div></details>
+        <details class="hh-faq-item"><summary>When is the Phase One giving window?</summary><div class="hh-faq-answer">Phase One runs for 5 Sundays: <strong>Sunday, April 26 through Pentecost Sunday, May 24.</strong> Our Phase One goal is <strong>$1.5M</strong>, and we are believing God to possess the promise in this window.</div></details>
+        <details class="hh-faq-item"><summary>What are the two ways to give?</summary><div class="hh-faq-answer">There are two separate, distinct ways to say yes, and you can do one or both.<br/><br/><strong>1. A one-time gift.</strong> This is actual giving, not a pledge or an IOU. Real dollars move into the campaign the moment you give.<br/><br/><strong>2. A 12-month faith commitment.</strong> This is ongoing monthly giving across a full year. You tell God what you are believing Him for, and you give toward it month by month.</div></details>
+        <details class="hh-faq-item"><summary>How long is the faith commitment?</summary><div class="hh-faq-answer">The faith commitment is a <strong>12-month</strong> window. You can fulfill it weekly, monthly, or in lump sums based on what works for your family.</div></details>
+        <details class="hh-faq-item"><summary>Is my pledge in addition to my regular tithe?</summary><div class="hh-faq-answer">Yes. Harvest Hands is intended to be a sacrificial offering above and beyond your regular tithes and offerings, so the day-to-day ministry of Fearless can keep moving forward while we build for the future.</div></details>
+        <details class="hh-faq-item"><summary>What if my financial situation changes?</summary><div class="hh-faq-answer">Your pledge is a faith commitment, not a contract. If your situation changes, simply reach out to our team and we will adjust together. We trust God and we trust you.</div></details>
+        <details class="hh-faq-item"><summary>Are gifts tax deductible?</summary><div class="hh-faq-answer">Yes. Fearless Church is a registered 501(c)(3), and all gifts to Harvest Hands are tax deductible to the fullest extent allowed by law. You will receive a year-end giving statement.</div></details>
+        <details class="hh-faq-item"><summary>Where exactly does my gift go?</summary><div class="hh-faq-answer">One hundred percent of every gift designated to Harvest Hands goes directly to the building campaign. None of it covers operational expenses or staff salaries.</div></details>
+        <details class="hh-faq-item"><summary>Can I give from stock, an IRA, or my estate?</summary><div class="hh-faq-answer">Absolutely. We welcome creative giving including appreciated stock, IRA qualified charitable distributions, donor-advised funds, real estate, and planned/estate gifts. Click the <strong>Give</strong> button in the Creative Giving section above and our team will walk you through every step.</div></details>
+        <details class="hh-faq-item"><summary>How do I stay updated on what God is doing?</summary><div class="hh-faq-answer">We will share regular updates by email and from the platform on Sundays. Make sure you are on the Fearless email list and following @fearless_la so you do not miss a single milestone.</div></details>
       </div>
     </div>
   </section>
 
-  <!-- 16. FINAL CTA (photo bg) ============================= -->
-  <section class="hh-section hh-section--photo hh-final"
-           style="background-image: url('assets/photos/final-cta-bg.jpg');">
+  <section class="hh-section hh-section--photo hh-final" style="background-image: url('final-cta-bg.jpg');">
     <div class="hh-inner hh-center">
       <div class="hh-eyebrow">Build With Us</div>
       <h2 class="hh-display hh-h2">It&rsquo;s Time to Build.</h2>
@@ -2228,7 +1010,6 @@
   </section>
 
   <script>
-    /* ---------- YouTube click-to-play (minimal branding) ---------- */
     (function () {
       document.querySelectorAll('.hh-video-player').forEach(function (player) {
         player.addEventListener('click', function () {
@@ -2236,8 +1017,7 @@
           var id = player.dataset.ytId;
           if (!id) return;
           var iframe = document.createElement('iframe');
-          iframe.src = 'https://www.youtube-nocookie.com/embed/' + id +
-                       '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+          iframe.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
           iframe.title = 'Harvest Hands vision video';
           iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
           iframe.setAttribute('allowfullscreen', '');
@@ -2247,42 +1027,10 @@
       });
     })();
 
-    /* ---------- Scroll-reveal animations ---------- */
     (function () {
-      // Respect reduced motion preference
       var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      // Decide which elements should reveal on scroll
-      var revealTargets = [
-        // Every intro block
-        '.hh-intro',
-        // Every content grid child
-        '.hh-phase-card',
-        '.hh-lane',
-        '.hh-way',
-        '.hh-render',
-        // Scripture + tier table + letter + form + faq + final pieces
-        '.hh-scripture-quote',
-        '.hh-scripture-ref',
-        '.hh-ornament',
-        '.hh-render-hero',
-        '.hh-tier-table',
-        '.hh-tier-caption',
-        '.hh-letter-photo',
-        '.hh-letter-content',
-        '.hh-cta-card',
-        '.hh-faq-list',
-        '.hh-video-player',
-        '.hh-thermo',
-        '.hh-thermo-meta',
-        '.hh-thermo-note',
-        '.hh-final .hh-h2',
-        '.hh-final-lead',
-        '.hh-final .hh-btn-row'
-      ];
-
+      var revealTargets = ['.hh-intro','.hh-phase-card','.hh-lane','.hh-way','.hh-render','.hh-scripture-quote','.hh-scripture-ref','.hh-ornament','.hh-render-hero','.hh-tier-table','.hh-tier-caption','.hh-letter-photo','.hh-letter-content','.hh-cta-card','.hh-faq-list','.hh-video-player','.hh-thermo','.hh-thermo-meta','.hh-thermo-note','.hh-final .hh-h2','.hh-final-lead','.hh-final .hh-btn-row'];
       var els = document.querySelectorAll(revealTargets.join(','));
-      // Don't animate things inside the hero (hero has its own intro animation)
       var hero = document.querySelector('.hh-hero');
       var toObserve = [];
       els.forEach(function (el) {
@@ -2290,61 +1038,40 @@
         el.classList.add('hh-reveal');
         toObserve.push(el);
       });
-
       if (reduce || !('IntersectionObserver' in window)) {
         toObserve.forEach(function (el) { el.classList.add('is-visible'); });
       } else {
         var io = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              io.unobserve(entry.target);
-            }
+            if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
           });
         }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
         toObserve.forEach(function (el) { io.observe(el); });
       }
     })();
 
-    /* ---------- Thermometer fill on scroll ---------- */
     (function () {
       var thermo = document.querySelector('.hh-thermo');
       if (!thermo) return;
       var fill = thermo.querySelector('.hh-thermo-fill');
       if (!fill) return;
-
-      // Read initial width from inline style, then store on the thermo so the
-      // CSS variable can drive the animation.
       var initial = fill.style.width || '8.5%';
       thermo.style.setProperty('--fill-width', initial);
       fill.style.width = '0%';
-
       var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduce || !('IntersectionObserver' in window)) {
-        thermo.classList.add('is-filled');
-        return;
-      }
-
+      if (reduce || !('IntersectionObserver' in window)) { thermo.classList.add('is-filled'); return; }
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            // Tiny delay so the fill reads after the meta animates in
-            setTimeout(function () { thermo.classList.add('is-filled'); }, 200);
-            io.unobserve(entry.target);
-          }
+          if (entry.isIntersecting) { setTimeout(function () { thermo.classList.add('is-filled'); }, 200); io.unobserve(entry.target); }
         });
       }, { threshold: 0.4 });
       io.observe(thermo);
     })();
   </script>
 
-  <!-- FOOTER ================================================= -->
   <footer class="hh-footer">
     <div class="hh-inner">
-      <img
-        src="assets/logos/FEARLESS LOGO.png"
-        alt="Fearless Church"
-        class="hh-footer-logo" />
+      <img src="FEARLESS LOGO.png" alt="Fearless Church" class="hh-footer-logo" />
       <p class="hh-footer-tagline">A house for the harvest in Los Angeles.</p>
       <hr class="hh-footer-rule" />
       <div class="hh-footer-links">
@@ -2356,9 +1083,7 @@
         <span class="hh-footer-sep">&bull;</span>
         <a href="mailto:info@fearlessla.com">Contact</a>
       </div>
-      <div class="hh-footer-copy">
-        &copy; 2026 Fearless Church &nbsp;&bull;&nbsp; All Rights Reserved
-      </div>
+      <div class="hh-footer-copy">&copy; 2026 Fearless Church &nbsp;&bull;&nbsp; All Rights Reserved</div>
     </div>
   </footer>
 
