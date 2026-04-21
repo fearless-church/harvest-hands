@@ -23,6 +23,7 @@ jobs:
 
       - name: Run giving update script
         env:
+          OVERFLOW_CLIENT_ID: ${{ secrets.OVERFLOW_CLIENT_ID }}
           OVERFLOW_API_KEY: ${{ secrets.OVERFLOW_API_KEY }}
         run: python update_giving.py
 
