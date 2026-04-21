@@ -9,61 +9,93 @@ BASE_URL = "https://server.overflow.co/api/v3"
 # Church contribution in dollars — update only when Ben instructs
 CHURCH_CONTRIBUTION = 141276.92  # $141,276.92
 
-def get_all_campaigns(headers):
+# Statuses to include in the total
+INCLUDE_STATUSES = {"CONFIRMED", "PAID_OUT", "PROCESSING", "PENDING"}
+
+def get_harvest_hands_campaign_id():
+    """Find the Harvest Hands subcampaign ID under Los Angeles."""
+    headers = {
+        "x-client-id": OVERFLOW_CLIENT_ID,
+        "x-api-key": OVERFLOW_API_KEY
+    }
+
+    # Get LA parent campaign
     resp = requests.get(
         f"{BASE_URL}/campaigns",
         headers=headers,
         params={"isSubcampaign": "false", "limit": 100}
     )
     resp.raise_for_status()
-    return resp.json().get("data", [])
+    campaigns = resp.json().get("data", [])
 
-def get_subcampaigns_for_parent(headers, parent_id):
+    la = next((c for c in campaigns if "los angeles" in c["name"].lower()), None)
+    if not la:
+        raise ValueError("Los Angeles campaign not found.")
+
+    # Get subcampaigns under LA
     resp = requests.get(
         f"{BASE_URL}/campaigns",
         headers=headers,
-        params={
-            "isSubcampaign": "true",
-            "parentCampaignId": parent_id,
-            "limit": 100
-        }
+        params={"isSubcampaign": "true", "parentCampaignId": la["id"], "limit": 100}
     )
     resp.raise_for_status()
-    return resp.json().get("data", [])
+    subs = resp.json().get("data", [])
 
-def get_harvest_hands_total():
+    hh = next((c for c in subs if "harvest hands" in c["name"].lower()), None)
+    if not hh:
+        raise ValueError("Harvest Hands subcampaign not found.")
+
+    print(f"Found subcampaign: {hh['name']} ({hh['id']})")
+    return hh["id"]
+
+def get_all_contributions(subcampaign_id):
+    """Page through all contributions for this subcampaign and sum valid ones."""
     headers = {
         "x-client-id": OVERFLOW_CLIENT_ID,
         "x-api-key": OVERFLOW_API_KEY
     }
 
-    all_campaigns = get_all_campaigns(headers)
+    total = 0.0
+    page = 1
+    included = 0
+    skipped = 0
 
-    # Pull from LA only — same subcampaign appears under multiple parents
-    # causing double counting. LA holds the real total.
-    la_campaign = next(
-        (c for c in all_campaigns if "los angeles" in c["name"].lower()),
-        None
-    )
+    while True:
+        resp = requests.get(
+            f"{BASE_URL}/contributions",
+            headers=headers,
+            params={
+                "subcampaignId": subcampaign_id,
+                "limit": 100,
+                "page": page
+            }
+        )
+        resp.raise_for_status()
+        data = resp.json()
+        contributions = data.get("data", [])
+        total_count = data.get("totalCount", 0)
 
-    if not la_campaign:
-        raise ValueError("Could not find Los Angeles parent campaign.")
+        if not contributions:
+            break
 
-    print(f"Found LA campaign: {la_campaign['name']} ({la_campaign['id']})")
+        for c in contributions:
+            status = c.get("status", "")
+            amount = float(c.get("amount", 0))
+            if status in INCLUDE_STATUSES:
+                total += amount
+                included += 1
+            else:
+                skipped += 1
+                print(f"  Skipped: status={status} amount=${amount:,.2f}")
 
-    subcampaigns = get_subcampaigns_for_parent(headers, la_campaign["id"])
-    hh = next(
-        (c for c in subcampaigns if "harvest hands" in c["name"].lower()),
-        None
-    )
+        print(f"Page {page}: {len(contributions)} contributions, running total ${total:,.2f}")
 
-    if not hh:
-        raise ValueError("Harvest Hands subcampaign not found under Los Angeles.")
+        if page * 100 >= total_count:
+            break
+        page += 1
 
-    # API returns dollars, not cents
-    amount = float(hh.get("totalContributionValue", 0))
-    print(f"Found '{hh['name']}': ${amount:,.2f}")
-    return amount
+    print(f"Done: {included} included, {skipped} skipped, total ${total:,.2f}")
+    return total
 
 def format_display(dollars):
     if dollars >= 1_000_000:
@@ -87,13 +119,11 @@ def update_html(total_dollars):
         f'data-raised="{total_dollars:.0f}"',
         html
     )
-
     html = re.sub(
         r'(class="hh-thermo-fill"[^>]*style="width:\s*)[\d.]+%',
         rf'\g<1>{fill_str}',
         html
     )
-
     html = re.sub(
         r'(<span>)\$[\d,.]+[KM]? committed(</span>)',
         rf'\g<1>{display} committed\g<2>',
@@ -106,7 +136,8 @@ def update_html(total_dollars):
     print(f"index.html updated: {display} committed ({fill_str} of goal)")
 
 if __name__ == "__main__":
-    overflow_total = get_harvest_hands_total()
+    subcampaign_id = get_harvest_hands_campaign_id()
+    overflow_total = get_all_contributions(subcampaign_id)
     total = overflow_total + CHURCH_CONTRIBUTION
     print(f"Overflow: ${overflow_total:,.2f} + Church: ${CHURCH_CONTRIBUTION:,.2f} = Total: ${total:,.2f}")
     update_html(total)
