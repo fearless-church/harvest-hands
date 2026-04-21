@@ -388,7 +388,7 @@
   .hh-thermo-phase span { display: block; font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 6px; opacity: 0.65; }
   .hh-thermo { max-width: 820px; margin: 0 auto; height: 18px; background-color: var(--fg-rule-soft); border: 1px solid var(--fg-rule); position: relative; overflow: hidden; }
   .hh-thermo-fill { height: 100%; background: var(--fg); transition: width 0.8s ease; }
-  .hh-thermo-mark { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--fg); left: 50%; transform: translateX(-50%); z-index: 2; opacity: 0.55; }
+  .hh-thermo-mark { position: absolute; top: -44px; bottom: -44px; width: 2px; background: var(--fg); left: 50%; transform: translateX(-50%); z-index: 2; opacity: 0.4; }
   .hh-thermo-meta { display: flex; justify-content: space-between; max-width: 820px; margin: 16px auto 0; font-size: 12px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg); }
   .hh-thermo-note { margin-top: 32px; font-family: 'Ascentis', Georgia, serif; font-size: 20px; opacity: 0.75; }
 
@@ -681,8 +681,8 @@
   <section class="hh-section hh-section--photo hh-scripture" style="background-image: url('scripture-bg.jpg');">
     <div class="hh-inner">
       <div class="hh-ornament">&bull; &bull; &bull;</div>
-      <p class="hh-scripture-quote">&ldquo;Go up to the mountain, bring wood and build the house, that I may take pleasure in it and be glorified.&rdquo;</p>
-      <div class="hh-scripture-ref">Haggai 1:8</div>
+      <p class="hh-scripture-quote">&ldquo;The harvest is plentiful, but the workers are few. Ask the Lord of the harvest to send harvest hands into his fields.&rdquo;</p>
+      <div class="hh-scripture-ref">Matthew 9:37&ndash;38</div>
     </div>
   </section>
 
@@ -713,6 +713,7 @@
         <div class="hh-eyebrow">The Vision in Two Phases</div>
         <h2 class="hh-display hh-h2">A House for the Harvest.</h2>
         <p class="hh-callout hh-lead">Together, we are believing God for <strong>$3,000,000</strong>.</p>
+      <p class="hh-body hh-lead" style="margin-top:20px;font-size:14px;">Every dollar given to Harvest Hands is going toward securing and building a permanent home for Fearless Church in Los Angeles. While we are actively pursuing a specific property, the funds will go toward whatever building God provides for this house.</p>
       </div>
       <div class="hh-phase-grid">
         <div class="hh-phase-card">
@@ -739,7 +740,9 @@
         <p class="hh-callout hh-lead">Believing God for <strong>$3,000,000</strong> to possess the promise and prepare the house.</p>
         <div class="hh-window-card">
           <div class="hh-window-label">Phase One Giving Window</div>
-          <div class="hh-window-dates">Sunday, April 26 &nbsp;&ndash;&nbsp; Pentecost Sunday, May 24</div>
+          <div class="hh-window-dates" style="font-size:38px;line-height:1.1;margin-bottom:4px;">Launch Sunday, April 26</div>
+          <div style="font-family:'Neue Haas',Helvetica,Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;">Giving Begins</div>
+          <div class="hh-window-dates" style="font-size:22px;line-height:1.2;margin-bottom:6px;">Ending Pentecost Sunday, May 24</div>
           <div class="hh-window-meta">5 Sundays &nbsp;&bull;&nbsp; Phase One Goal: $1.5M</div>
         </div>
       </div>
@@ -747,12 +750,12 @@
         <div class="hh-thermo-phase">First Step Through the Door<span>Phase One &middot; $1.5M</span></div>
         <div class="hh-thermo-phase">Finish the Project<span>Phase Two &middot; $3M</span></div>
       </div>
-      <div class="hh-thermo" data-raised="259210" data-goal="3000000" aria-label="Campaign progress">
-        <div class="hh-thermo-fill" style="width: 8.6%;"></div>
+      <div class="hh-thermo" data-raised="255000" data-goal="3000000" aria-label="Campaign progress">
+        <div class="hh-thermo-fill" style="width: 8.5%;"></div>
         <div class="hh-thermo-mark" aria-hidden="true"></div>
       </div>
       <div class="hh-thermo-meta">
-        <span>$259K committed</span>
+        <span>$255K committed</span>
         <span>Goal &nbsp;$3M</span>
       </div>
       <p class="hh-thermo-note">Not equal gifts, but equal sacrifice.</p>
@@ -1016,7 +1019,7 @@
           var id = player.dataset.ytId;
           if (!id) return;
           var iframe = document.createElement('iframe');
-          iframe.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+          iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1';
           iframe.title = 'Harvest Hands vision video';
           iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
           iframe.setAttribute('allowfullscreen', '');
