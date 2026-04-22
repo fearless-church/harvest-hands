@@ -635,12 +635,161 @@
     .hh-footer-address { font-size: 10px; letter-spacing: 0.18em; }
     .hh-footer-copy { font-size: 9px; letter-spacing: 0.22em; margin-top: 16px; }
   }
+
+  /* ===== FLOATING PROGRESS WIDGET ===== */
+  .hh-floating-progress {
+    position: fixed;
+    top: 68px;
+    right: 22px;
+    z-index: 199;
+    width: 240px;
+    padding: 12px 16px 10px;
+    background: rgba(15, 13, 11, 0.55);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(237, 226, 204, 0.15);
+    transition: background 0.4s ease, border-color 0.4s ease;
+  }
+  .hh-floating-progress.fp-light {
+    background: rgba(237, 226, 204, 0.65);
+    border-color: rgba(15, 13, 11, 0.1);
+  }
+  .hh-fp-top {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .hh-fp-raised {
+    font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+    line-height: 1;
+    transition: color 0.4s ease;
+  }
+  .fp-light .hh-fp-raised { color: var(--charcoal); }
+  .hh-fp-label {
+    font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(237, 226, 204, 0.5);
+    transition: color 0.4s ease;
+  }
+  .fp-light .hh-fp-label { color: rgba(15, 13, 11, 0.45); }
+  .hh-fp-bar {
+    width: 100%;
+    height: 3px;
+    background: rgba(237, 226, 204, 0.15);
+    margin-bottom: 8px;
+    position: relative;
+    transition: background 0.4s ease;
+  }
+  .fp-light .hh-fp-bar { background: rgba(15, 13, 11, 0.12); }
+  .hh-fp-bar-fill {
+    height: 100%;
+    background: var(--cream);
+    transition: width 0.8s ease, background 0.4s ease;
+  }
+  .fp-light .hh-fp-bar-fill { background: var(--charcoal); }
+  .hh-fp-bar-mark {
+    position: absolute;
+    top: -3px;
+    bottom: -3px;
+    left: 50%;
+    width: 1px;
+    background: rgba(237, 226, 204, 0.3);
+    transform: translateX(-50%);
+    transition: background 0.4s ease;
+  }
+  .fp-light .hh-fp-bar-mark { background: rgba(15, 13, 11, 0.2); }
+  .hh-fp-phases {
+    display: flex;
+    justify-content: space-between;
+  }
+  .hh-fp-phase-label {
+    font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(237, 226, 204, 0.4);
+    margin-bottom: 2px;
+    transition: color 0.4s ease;
+  }
+  .fp-light .hh-fp-phase-label { color: rgba(15, 13, 11, 0.35); }
+  .hh-fp-phase-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .hh-fp-phase.fp-right { text-align: right; }
+  .hh-fp-phase.fp-right .hh-fp-phase-row { justify-content: flex-end; }
+  .hh-fp-phase-amount {
+    font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: rgba(237, 226, 204, 0.8);
+    transition: color 0.4s ease;
+  }
+  .fp-light .hh-fp-phase-amount { color: rgba(15, 13, 11, 0.7); }
+  .hh-fp-phase-pct {
+    font-family: 'Neue Haas', Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: rgba(237, 226, 204, 0.5);
+    transition: color 0.4s ease;
+  }
+  .fp-light .hh-fp-phase-pct { color: rgba(15, 13, 11, 0.45); }
+  @media (max-width: 820px) {
+    .hh-floating-progress {
+      top: 56px;
+      right: 16px;
+      width: 200px;
+      padding: 10px 12px 8px;
+    }
+    .hh-fp-raised { font-size: 17px; }
+    .hh-fp-phase-amount { font-size: 11px; }
+    .hh-fp-phase-pct { font-size: 9px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hh-floating-progress, .hh-fp-raised, .hh-fp-label, .hh-fp-bar,
+    .hh-fp-bar-fill, .hh-fp-phases, .hh-fp-phase-label,
+    .hh-fp-phase-amount, .hh-fp-phase-pct, .hh-fp-bar-mark { transition: none !important; }
+  }
 </style>
 </head>
 
 <body>
 
   <a href="https://donate.overflow.co/fearless/cash?config=harvest-hands" class="hh-give-pin" target="_blank" rel="noopener">Give Now</a>
+
+  <!-- Floating Progress Widget -->
+  <div class="hh-floating-progress" id="floatingProgress">
+    <div class="hh-fp-top">
+      <div class="hh-fp-raised" id="fpRaised">$285K</div>
+      <div class="hh-fp-label">committed</div>
+    </div>
+    <div class="hh-fp-bar">
+      <div class="hh-fp-bar-fill" id="fpBarFill" style="width: 9.5%;"></div>
+      <div class="hh-fp-bar-mark"></div>
+    </div>
+    <div class="hh-fp-phases">
+      <div class="hh-fp-phase">
+        <div class="hh-fp-phase-label">Phase 1</div>
+        <div class="hh-fp-phase-row"><span class="hh-fp-phase-amount">$1.5M</span><span class="hh-fp-phase-pct" id="fpPctP1">19.0%</span></div>
+      </div>
+      <div class="hh-fp-phase fp-right">
+        <div class="hh-fp-phase-label">Phase 2</div>
+        <div class="hh-fp-phase-row"><span class="hh-fp-phase-amount">$3M</span><span class="hh-fp-phase-pct" id="fpPctP2">9.5%</span></div>
+      </div>
+    </div>
+  </div>
 
   <section class="hh-hero" id="top">
     <video class="hh-hero-video" autoplay muted loop playsinline preload="auto" poster="hero-flyover-poster.jpg">
@@ -750,12 +899,12 @@
         <div class="hh-thermo-phase">First Step Through the Door<span>Phase One &middot; $1.5M</span></div>
         <div class="hh-thermo-phase">Finish the Project<span>Phase Two &middot; $3M</span></div>
       </div>
-      <div class="hh-thermo" data-raised="287278" data-goal="3000000" aria-label="Campaign progress">
-        <div class="hh-thermo-fill" style="width: 9.6%;"></div>
+      <div class="hh-thermo" data-raised="255000" data-goal="3000000" aria-label="Campaign progress">
+        <div class="hh-thermo-fill" style="width: 8.5%;"></div>
         <div class="hh-thermo-mark" aria-hidden="true"></div>
       </div>
       <div class="hh-thermo-meta">
-        <span>$287K committed</span>
+        <span>$255K committed</span>
         <span>Goal &nbsp;$3M</span>
       </div>
       <p class="hh-thermo-note">Not equal gifts, but equal sacrifice.</p>
@@ -1068,6 +1217,35 @@
         });
       }, { threshold: 0.4 });
       io.observe(thermo);
+    })();
+  
+    /* ---------- Floating progress: auto-switch light/dark ---------- */
+    (function () {
+      var widget = document.getElementById('floatingProgress');
+      if (!widget) return;
+
+      var darkSections = document.querySelectorAll('.hh-section--dark, .hh-section--photo, .hh-hero');
+      var creamSections = document.querySelectorAll('.hh-section:not(.hh-section--dark):not(.hh-section--photo)');
+
+      function checkPosition() {
+        var widgetRect = widget.getBoundingClientRect();
+        var widgetMid = widgetRect.top + widgetRect.height / 2;
+        var isOverDark = false;
+
+        darkSections.forEach(function (sec) {
+          var r = sec.getBoundingClientRect();
+          if (widgetMid >= r.top && widgetMid <= r.bottom) isOverDark = true;
+        });
+
+        if (isOverDark) {
+          widget.classList.remove('fp-light');
+        } else {
+          widget.classList.add('fp-light');
+        }
+      }
+
+      window.addEventListener('scroll', checkPosition, { passive: true });
+      checkPosition();
     })();
   </script>
 
