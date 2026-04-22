@@ -130,6 +130,32 @@ def update_html(total_dollars):
         html
     )
 
+    # Update floating progress widget
+    phase1_goal = 1_500_000
+    pct_p1 = min((total_dollars / phase1_goal) * 100, 100)
+    pct_p1_str = f"{pct_p1:.1f}%"
+
+    html = re.sub(
+        r'(<div class="hh-fp-raised" id="fpRaised">)\$[\d,.]+[KM]?(</div>)',
+        rf'\g<1>{display}\g<2>',
+        html
+    )
+    html = re.sub(
+        r'(<div class="hh-fp-bar-fill" id="fpBarFill" style="width:\s*)[\d.]+%',
+        rf'\g<1>{fill_str}',
+        html
+    )
+    html = re.sub(
+        r'(<span class="hh-fp-phase-pct" id="fpPctP1">)[\d.]+%(</span>)',
+        rf'\g<1>{pct_p1_str}\g<2>',
+        html
+    )
+    html = re.sub(
+        r'(<span class="hh-fp-phase-pct" id="fpPctP2">)[\d.]+%(</span>)',
+        rf'\g<1>{fill_str}\g<2>',
+        html
+    )
+
     with open("index.html", "w", encoding="utf-8") as f:
         f.write(html)
 
