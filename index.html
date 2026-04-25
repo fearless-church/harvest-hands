@@ -750,21 +750,21 @@
   <!-- Floating Progress Widget -->
   <div class="hh-floating-progress" id="floatingProgress">
     <div class="hh-fp-top">
-      <div class="hh-fp-raised" id="fpRaised">$312K</div>
+      <div class="hh-fp-raised" id="fpRaised">$301K</div>
       <div class="hh-fp-label">committed</div>
     </div>
     <div class="hh-fp-bar">
-      <div class="hh-fp-bar-fill" id="fpBarFill" style="width: 10.4%;"></div>
+      <div class="hh-fp-bar-fill" id="fpBarFill" style="width: 10.0%;"></div>
       <div class="hh-fp-bar-mark"></div>
     </div>
     <div class="hh-fp-phases">
       <div class="hh-fp-phase">
         <div class="hh-fp-phase-label">Phase 1</div>
-        <div class="hh-fp-phase-row"><span class="hh-fp-phase-amount">$1.5M</span><span class="hh-fp-phase-pct" id="fpPctP1">20.8%</span></div>
+        <div class="hh-fp-phase-row"><span class="hh-fp-phase-amount">$1.5M</span><span class="hh-fp-phase-pct" id="fpPctP1">20.0%</span></div>
       </div>
       <div class="hh-fp-phase fp-right">
         <div class="hh-fp-phase-label">Phase 2</div>
-        <div class="hh-fp-phase-row"><span class="hh-fp-phase-amount">$3M</span><span class="hh-fp-phase-pct" id="fpPctP2">10.4%</span></div>
+        <div class="hh-fp-phase-row"><span class="hh-fp-phase-amount">$3M</span><span class="hh-fp-phase-pct" id="fpPctP2">10.0%</span></div>
       </div>
     </div>
   </div>
@@ -786,6 +786,68 @@
       </div>
     </div>
     <div class="hh-scroll-cue">Scroll</div>
+  </section>
+  <style>
+    .hhs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-bottom: var(--gap-intro-content); align-items: start; }
+    @media (max-width: 820px) { .hhs-grid { grid-template-columns: 1fr; gap: 48px; } }
+    .hhs-col-label { font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--fg); opacity: 0.6; margin-bottom: 22px; padding-bottom: 18px; border-bottom: 1px solid var(--fg-rule); }
+    .hhs-schedule { list-style: none; padding: 0; margin: 0; }
+    .hhs-schedule li { display: flex; gap: 22px; padding: 16px 0; border-bottom: 1px solid var(--fg-rule-soft); align-items: baseline; }
+    .hhs-schedule li:last-child { border-bottom: 0; }
+    .hhs-time { font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg); flex: 0 0 92px; }
+    .hhs-event { font-family: 'Ascentis', Georgia, serif; font-size: 22px; line-height: 1.25; color: var(--fg); }
+    .hhs-perks { display: flex; flex-direction: column; gap: 28px; }
+    .hhs-perk { padding-left: 20px; border-left: 2px solid var(--fg); }
+    .hhs-perk-title { font-family: 'Ascentis', Georgia, serif; font-size: 26px; line-height: 1.15; color: var(--fg); margin-bottom: 8px; }
+    .hhs-perk-body { font-size: 15.5px; line-height: 1.7; color: var(--fg-muted); margin: 0; }
+    .hhs-map { text-align: center; padding-top: 24px; border-top: 1px solid var(--fg-rule); }
+    .hhs-map-label { margin-bottom: 28px; }
+    .hhs-map img { width: 100%; max-width: 980px; margin: 0 auto; border: 1px solid var(--fg-rule); display: block; }
+    .hhs-map-caption { margin-top: 20px; font-family: 'Neue Haas', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--fg-muted); }
+  </style>
+  <section id="sunday" class="hh-section">
+    <div class="hh-inner">
+      <div class="hh-intro">
+        <div class="hh-eyebrow">Sunday April 26</div>
+        <h2 class="hh-display hh-h2">Harvest Hands Sunday.</h2>
+        <p class="hh-body hh-lead">The first Sunday of Phase One. We gather to worship, commit, and march together to the doors God is opening at 6230 Sunset.</p>
+      </div>
+      <div class="hhs-grid">
+        <div>
+          <div class="hhs-col-label">The Schedule</div>
+          <ul class="hhs-schedule">
+            <li><span class="hhs-time">10:30 AM</span><span class="hhs-event">Doors open at Hollywood High</span></li>
+            <li><span class="hhs-time">11:00 AM</span><span class="hhs-event">Service begins</span></li>
+            <li><span class="hhs-time">12:15 PM</span><span class="hhs-event">Commitments + Toolbox rally outside</span></li>
+            <li><span class="hhs-time">12:30 PM</span><span class="hhs-event">The Jesus March down Sunset</span></li>
+            <li><span class="hhs-time">1:00 PM</span><span class="hhs-event">Arrival + prayer at 6230 Sunset</span></li>
+            <li><span class="hhs-time">1:30 PM</span><span class="hhs-event">Free tacos + fellowship</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="hhs-col-label">What to Know</div>
+          <div class="hhs-perks">
+            <div class="hhs-perk">
+              <div class="hhs-perk-title">Free tacos after the march.</div>
+              <p class="hhs-perk-body">Stay for lunch and fellowship at 6230 Sunset. Tacos are on us, no signup needed.</p>
+            </div>
+            <div class="hhs-perk">
+              <div class="hhs-perk-title">A keychain for every giver.</div>
+              <p class="hhs-perk-body">Every person who makes a commitment toward the vision walks away with a Harvest Hands keychain.</p>
+            </div>
+            <div class="hhs-perk">
+              <div class="hhs-perk-title">Bring a friend.</div>
+              <p class="hhs-perk-body">This Sunday is bigger than us. Invite somebody who needs to see what God is doing in Hollywood.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hhs-map">
+        <div class="hhs-col-label hhs-map-label">The Jesus March Route</div>
+        <img src="jesus-march-route.png" alt="Map of the Jesus March route from Hollywood High School down Sunset Boulevard to 6230 Sunset" />
+        <div class="hhs-map-caption">Hollywood High &rarr; Sunset Blvd &rarr; 6230 Sunset</div>
+      </div>
+    </div>
   </section>
   <section id="vision" class="hh-section">
     <div class="hh-inner">
@@ -871,12 +933,12 @@
         <div class="hh-thermo-phase">First Step Through the Door<span>Phase One &middot; $1.5M</span></div>
         <div class="hh-thermo-phase">Finish the Project<span>Phase Two &middot; $3M</span></div>
       </div>
-      <div class="hh-thermo" data-raised="312280" data-goal="3000000" aria-label="Campaign progress">
-        <div class="hh-thermo-fill" style="width: 10.4%;"></div>
+      <div class="hh-thermo" data-raised="300603" data-goal="3000000" aria-label="Campaign progress">
+        <div class="hh-thermo-fill" style="width: 10.0%;"></div>
         <div class="hh-thermo-mark" aria-hidden="true"></div>
       </div>
       <div class="hh-thermo-meta">
-        <span>$312K committed</span>
+        <span>$301K committed</span>
         <span>Goal &nbsp;$3M</span>
       </div>
       <p class="hh-thermo-note">Not equal gifts, but equal sacrifice.</p>
