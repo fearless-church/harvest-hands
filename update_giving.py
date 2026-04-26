@@ -1,6 +1,7 @@
 import os
 import re
 import requests
+from datetime import datetime, timezone
 
 OVERFLOW_CLIENT_ID = os.environ["OVERFLOW_CLIENT_ID"]
 OVERFLOW_API_KEY = os.environ["OVERFLOW_API_KEY"]
@@ -156,10 +157,18 @@ def update_html(total_dollars):
         html
     )
 
+    # Write timestamp so git always sees a change
+    timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
+    html = re.sub(
+        r'<!-- GIVING_UPDATED:.*?-->',
+        f'<!-- GIVING_UPDATED: {timestamp} -->',
+        html
+    )
+
     with open("index.html", "w", encoding="utf-8") as f:
         f.write(html)
 
-    print(f"index.html updated: {display} committed ({fill_str} of goal)")
+    print(f"index.html updated: {display} committed ({fill_str} of goal) at {timestamp}")
 
 if __name__ == "__main__":
     subcampaign_id = get_harvest_hands_campaign_id()
