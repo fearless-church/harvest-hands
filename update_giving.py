@@ -63,42 +63,17 @@ def get_harvest_hands_total():
         raise ValueError("Harvest Hands subcampaign not found under Los Angeles.")
 
     campaign_id = hh["id"]
-    print(f"Found '{hh['name']}' ({campaign_id})")
 
-    # Sum ALL individual contributions (Approved + Processing)
-    # instead of relying on totalContributionValue which may exclude Processing
-    total = 0.0
-    count = 0
-    page = 1
-    while True:
-        resp = requests.get(
-            f"{BASE_URL}/contributions",
-            headers=headers,
-            params={
-                "campaignId": campaign_id,
-                "limit": 100,
-                "page": page
-            }
-        )
-        resp.raise_for_status()
-        data = resp.json()
-        contributions = data.get("data", [])
-        if not contributions:
-            break
-        for c in contributions:
-            amount = float(c.get("amount", 0))
-            total += amount
-            count += 1
-        page += 1
+    # Use totalContributionValue from the campaign object
+    amount = float(hh.get("totalContributionValue", 0))
+    count = int(hh.get("totalContributionCount", 0))
+    print(f"Found '{hh['name']}' ({campaign_id}): ${amount:,.2f} ({count} contributions)")
 
-    print(f"Summed {count} contributions: ${total:,.2f}")
+    # Safety guard: never return $0 if we expect real data
+    if amount <= 0:
+        raise ValueError(f"API returned ${amount} for Harvest Hands. Refusing to update to prevent zeroing out the site.")
 
-    # Sanity check against campaign summary
-    summary_total = float(hh.get("totalContributionValue", 0))
-    if abs(total - summary_total) > 1:
-        print(f"  Note: campaign summary says ${summary_total:,.2f} (delta: ${total - summary_total:,.2f})")
-
-    return total
+    return amount
 
 def format_display(dollars):
     if dollars >= 1_000_000:
