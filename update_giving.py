@@ -62,10 +62,43 @@ def get_harvest_hands_total():
     if not hh:
         raise ValueError("Harvest Hands subcampaign not found under Los Angeles.")
 
-    # API returns dollars
-    amount = float(hh.get("totalContributionValue", 0))
-    print(f"Found '{hh['name']}': ${amount:,.2f}")
-    return amount
+    campaign_id = hh["id"]
+    print(f"Found '{hh['name']}' ({campaign_id})")
+
+    # Sum ALL individual contributions (Approved + Processing)
+    # instead of relying on totalContributionValue which may exclude Processing
+    total = 0.0
+    count = 0
+    page = 1
+    while True:
+        resp = requests.get(
+            f"{BASE_URL}/contributions",
+            headers=headers,
+            params={
+                "campaignId": campaign_id,
+                "limit": 100,
+                "page": page
+            }
+        )
+        resp.raise_for_status()
+        data = resp.json()
+        contributions = data.get("data", [])
+        if not contributions:
+            break
+        for c in contributions:
+            amount = float(c.get("amount", 0))
+            total += amount
+            count += 1
+        page += 1
+
+    print(f"Summed {count} contributions: ${total:,.2f}")
+
+    # Sanity check against campaign summary
+    summary_total = float(hh.get("totalContributionValue", 0))
+    if abs(total - summary_total) > 1:
+        print(f"  Note: campaign summary says ${summary_total:,.2f} (delta: ${total - summary_total:,.2f})")
+
+    return total
 
 def format_display(dollars):
     if dollars >= 1_000_000:
