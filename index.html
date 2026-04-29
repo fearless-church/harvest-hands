@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- GIVING_LAST_UPDATED: 2026-04-29 manual -->
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -370,6 +371,8 @@
   .hh-thermo-fill { height: 100%; background: var(--fg); transition: width 0.8s ease; }
   .hh-thermo-mark { position: absolute; top: -80px; bottom: -60px; width: 1.5px; background: var(--fg); left: 50%; transform: translateX(-50%); z-index: 2; opacity: 0.35; }
   .hh-thermo-meta { display: flex; justify-content: space-between; max-width: 820px; margin: 16px auto 0; font-size: 12px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg); }
+  .hh-thermo-registered { display: flex; justify-content: flex-start; gap: 8px; align-items: baseline; max-width: 820px; margin: 8px auto 0; font-size: 12px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg); opacity: 0.55; }
+  .hh-thermo-meta-sublabel { font-weight: 500; opacity: 0.65; letter-spacing: 0.22em; }
   .hh-thermo-note { margin-top: 32px; font-family: 'Ascentis', Georgia, serif; font-size: 20px; opacity: 0.75; }
   .hh-tier-table { width: 100%; max-width: 980px; margin: 0 auto; border-collapse: collapse; border-top: 1px solid var(--fg-rule); }
   .hh-tier-table thead th { font-family: 'Neue Haas', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; padding: 22px 18px; text-align: left; border-bottom: 1px solid var(--fg-rule); opacity: 0.65; color: var(--fg); }
@@ -750,21 +753,21 @@
   <!-- Floating Progress Widget -->
   <div class="hh-floating-progress" id="floatingProgress">
     <div class="hh-fp-top">
-      <div class="hh-fp-raised" id="fpRaised">$433K</div>
-      <div class="hh-fp-label">committed</div>
+      <div class="hh-fp-raised" id="fpRaised">$504K</div>
+      <div class="hh-fp-label" id="fpLabel">total commitments</div>
     </div>
     <div class="hh-fp-bar">
-      <div class="hh-fp-bar-fill" id="fpBarFill" style="width: 14.4%;"></div>
+      <div class="hh-fp-bar-fill" id="fpBarFill" style="width: 16.8%;"></div>
       <div class="hh-fp-bar-mark"></div>
     </div>
     <div class="hh-fp-phases">
       <div class="hh-fp-phase">
         <div class="hh-fp-phase-label">Phase 1</div>
-        <div class="hh-fp-phase-row"><span class="hh-fp-phase-amount">$1.5M</span><span class="hh-fp-phase-pct" id="fpPctP1">28.9%</span></div>
+        <div class="hh-fp-phase-row"><span class="hh-fp-phase-amount">$1.5M</span><span class="hh-fp-phase-pct" id="fpPctP1">33.6%</span></div>
       </div>
       <div class="hh-fp-phase fp-right">
         <div class="hh-fp-phase-label">Phase 2</div>
-        <div class="hh-fp-phase-row"><span class="hh-fp-phase-amount">$3M</span><span class="hh-fp-phase-pct" id="fpPctP2">14.4%</span></div>
+        <div class="hh-fp-phase-row"><span class="hh-fp-phase-amount">$3M</span><span class="hh-fp-phase-pct" id="fpPctP2">16.8%</span></div>
       </div>
     </div>
   </div>
@@ -871,13 +874,16 @@
         <div class="hh-thermo-phase">First Step Through the Door<span>Phase One &middot; $1.5M</span></div>
         <div class="hh-thermo-phase">Finish the Project<span>Phase Two &middot; $3M</span></div>
       </div>
-      <div class="hh-thermo" data-raised="433055" data-goal="3000000" aria-label="Campaign progress">
-        <div class="hh-thermo-fill" style="width: 14.4%;"></div>
+      <div class="hh-thermo" data-raised="504206" data-goal="3000000" aria-label="Campaign progress">
+        <div class="hh-thermo-fill" style="width: 16.8%;"></div>
         <div class="hh-thermo-mark" aria-hidden="true"></div>
       </div>
       <div class="hh-thermo-meta">
-        <span>$433K committed</span>
+        <span id="thermoGiven">$433K</span> <span class="hh-thermo-meta-sublabel">committed</span>
         <span>Goal &nbsp;$3M</span>
+      </div>
+      <div class="hh-thermo-registered">
+        <span id="thermoRegistered">$71,151</span> <span class="hh-thermo-meta-sublabel">registered commitments</span>
       </div>
       <p class="hh-thermo-note">Not equal gifts, but equal sacrifice.</p>
     </div>
