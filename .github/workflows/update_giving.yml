@@ -2,7 +2,7 @@ name: Update Harvest Hands Giving Total
 
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '0,30 * * * *'
   workflow_dispatch:
 
 permissions:
