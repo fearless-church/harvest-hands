@@ -105,12 +105,7 @@ def get_all_contributions(subcampaign_id):
     return total
 
 def format_display(dollars):
-    if dollars >= 1_000_000:
-        return f"${dollars/1_000_000:.1f}M"
-    elif dollars >= 1_000:
-        return f"${dollars/1_000:.0f}K"
-    else:
-        return f"${dollars:,.0f}"
+    return f"${dollars:,.2f}"
 
 def update_html(overflow_dollars, church_dollars, registered_dollars):
     with open("index.html", "r", encoding="utf-8") as f:
