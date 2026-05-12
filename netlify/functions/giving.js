@@ -9,19 +9,16 @@ export default async (request, context) => {
   try {
     const headers = { "x-client-id": CLIENT_ID, "x-api-key": API_KEY };
 
-    // Find LA campaign
     const campResp = await fetch(`${BASE}/campaigns?isSubcampaign=false&limit=100`, { headers });
     const camps = (await campResp.json()).data || [];
     const la = camps.find(c => c.name.toLowerCase().includes("los angeles"));
     if (!la) return Response.json({ error: "LA campaign not found" }, { status: 500 });
 
-    // Find Harvest Hands subcampaign
     const subResp = await fetch(`${BASE}/campaigns?isSubcampaign=true&parentCampaignId=${la.id}&limit=100`, { headers });
     const subs = (await subResp.json()).data || [];
     const hh = subs.find(c => c.name.toLowerCase().includes("harvest hands"));
     if (!hh) return Response.json({ error: "Harvest Hands not found" }, { status: 500 });
 
-    // Sum all valid contributions
     let total = 0;
     let page = 1;
     while (true) {
@@ -34,7 +31,7 @@ export default async (request, context) => {
         if (INCLUDE.has(c.status)) total += parseFloat(c.amount || 0);
       }
 
-      if (page * 100 >= (cData.totalCount || 0)) break;
+      if (contribs.length < 100) break;
       page++;
     }
 
