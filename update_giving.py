@@ -14,7 +14,7 @@ CHURCH_CONTRIBUTION = 141276.92
 REGISTERED_COMMITMENTS = 71151.36
 
 # Statuses to include in the total
-INCLUDE_STATUSES = {"CONFIRMED", "PAID_OUT", "PROCESSING", "PENDING"}
+INCLUDE_STATUSES = {"CONFIRMED", "PAID_OUT", "PROCESSING", "PENDING", "APPROVED"}
 
 def get_harvest_hands_campaign_id():
     """Find the Harvest Hands subcampaign ID under Los Angeles."""
