@@ -81,6 +81,7 @@ def get_all_contributions(subcampaign_id):
     page = 1
     included = 0
     skipped = 0
+    all_statuses = {}
 
     while True:
         resp = requests.get(
@@ -103,6 +104,18 @@ def get_all_contributions(subcampaign_id):
         for c in contributions:
             status = c.get("status", "")
             amount = float(c.get("amount", 0))
+            contrib_id = c.get("id", "")
+
+            # Track all statuses
+            if status not in all_statuses:
+                all_statuses[status] = {"count": 0, "total": 0.0}
+            all_statuses[status]["count"] += 1
+            all_statuses[status]["total"] += amount
+
+            # Look for Christy's $2,500 contribution
+            if contrib_id == "6a032866bb98a3fb32a98ccc":
+                print(f"  *** FOUND target contribution {contrib_id}: status={repr(status)} amount=${amount:,.2f} in_filter={status in INCLUDE_STATUSES}")
+
             if status in INCLUDE_STATUSES:
                 total += amount
                 included += 1
@@ -117,6 +130,14 @@ def get_all_contributions(subcampaign_id):
         page += 1
 
     print(f"Done: {included} included, {skipped} skipped, total ${total:,.2f}")
+
+    # Print all unique statuses the API returned
+    print(f"=== ALL API STATUSES ===")
+    for status, info in sorted(all_statuses.items()):
+        in_filter = "INCLUDED" if status in INCLUDE_STATUSES else "EXCLUDED"
+        print(f"  {repr(status)}: {info['count']} contributions, ${info['total']:,.2f} [{in_filter}]")
+    if "6a032866bb98a3fb32a98ccc" not in str(data):
+        print(f"  *** Christy's contribution (6a032866bb98a3fb32a98ccc) was NOT in any API response ***")
 
     # Safety guard
     if total <= 0:
