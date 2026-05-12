@@ -48,7 +48,27 @@ def get_harvest_hands_campaign_id():
         raise ValueError("Harvest Hands subcampaign not found.")
 
     print(f"Found subcampaign: {hh['name']} ({hh['id']})")
-    return hh["id"]
+    return hh["id"], hh
+
+def get_summary_total(subcampaign_id):
+    """Get the totalContributionValue from the campaign summary endpoint."""
+    headers = {
+        "x-client-id": OVERFLOW_CLIENT_ID,
+        "x-api-key": OVERFLOW_API_KEY
+    }
+    try:
+        resp = requests.get(
+            f"{BASE_URL}/campaigns/{subcampaign_id}",
+            headers=headers
+        )
+        resp.raise_for_status()
+        data = resp.json()
+        summary_val = float(data.get("totalContributionValue", 0))
+        print(f"Campaign summary totalContributionValue: ${summary_val:,.2f}")
+        return summary_val
+    except Exception as e:
+        print(f"Warning: Could not fetch campaign summary: {e}")
+        return 0.0
 
 def get_all_contributions(subcampaign_id):
     """Page through all contributions for this subcampaign and sum valid ones."""
@@ -192,8 +212,23 @@ def update_html(overflow_dollars, church_dollars, registered_dollars):
     print(f"  Combined: {combined_display} ({fill_str} of $3M goal)")
 
 if __name__ == "__main__":
-    subcampaign_id = get_harvest_hands_campaign_id()
-    overflow_total = get_all_contributions(subcampaign_id)
+    subcampaign_id, subcampaign_data = get_harvest_hands_campaign_id()
+
+    # Method 1: Paginate individual contributions and sum valid statuses
+    paginated_total = get_all_contributions(subcampaign_id)
+
+    # Method 2: Campaign summary totalContributionValue (may include APPROVED)
+    summary_total = get_summary_total(subcampaign_id)
+
+    # Use whichever is higher (summary may include APPROVED contributions
+    # that the paginated endpoint doesn't return)
+    if summary_total > paginated_total:
+        print(f"Using SUMMARY total: ${summary_total:,.2f} (higher than paginated ${paginated_total:,.2f} by ${summary_total - paginated_total:,.2f})")
+        overflow_total = summary_total
+    else:
+        print(f"Using PAGINATED total: ${paginated_total:,.2f} (>= summary ${summary_total:,.2f})")
+        overflow_total = paginated_total
+
     print(f"Overflow: ${overflow_total:,.2f} + Church: ${CHURCH_CONTRIBUTION:,.2f} + Registered: ${REGISTERED_COMMITMENTS:,.2f}")
     total = overflow_total + CHURCH_CONTRIBUTION + REGISTERED_COMMITMENTS
     print(f"Combined Total: ${total:,.2f}")
