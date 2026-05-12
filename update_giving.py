@@ -125,7 +125,7 @@ def get_all_contributions(subcampaign_id):
 
         print(f"Page {page}: {len(contributions)} contributions, running total ${total:,.2f}")
 
-        if page * 100 >= total_count:
+        if len(contributions) < 100:
             break
         page += 1
 
