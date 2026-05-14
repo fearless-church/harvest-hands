@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- GIVING_LAST_UPDATED: 2026-05-14 16:07 UTC -->
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -371,9 +370,6 @@
   .hh-thermo-fill { height: 100%; background: var(--fg); transition: width 0.8s ease; }
   .hh-thermo-mark { position: absolute; top: -80px; bottom: -60px; width: 1.5px; background: var(--fg); left: 50%; transform: translateX(-50%); z-index: 2; opacity: 0.35; }
   .hh-thermo-meta { display: flex; justify-content: space-between; max-width: 820px; margin: 16px auto 0; font-size: 12px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg); }
-  .hh-thermo-committed-group { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
-  .hh-thermo-plus { opacity: 0.4; font-size: 11px; }
-  .hh-thermo-meta-sublabel { font-weight: 500; opacity: 0.5; letter-spacing: 0.18em; font-size: 10px; }
   .hh-thermo-note { margin-top: 32px; font-family: 'Ascentis', Georgia, serif; font-size: 20px; opacity: 0.75; }
   .hh-tier-table { width: 100%; max-width: 980px; margin: 0 auto; border-collapse: collapse; border-top: 1px solid var(--fg-rule); }
   .hh-tier-table thead th { font-family: 'Neue Haas', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; padding: 22px 18px; text-align: left; border-bottom: 1px solid var(--fg-rule); opacity: 0.65; color: var(--fg); }
@@ -754,21 +750,21 @@
   <!-- Floating Progress Widget -->
   <div class="hh-floating-progress" id="floatingProgress">
     <div class="hh-fp-top">
-      <div class="hh-fp-raised" id="fpRaised">$579,306.52</div>
-      <div class="hh-fp-label" id="fpLabel">total commitments</div>
+      <div class="hh-fp-raised" id="fpRaised">$301K</div>
+      <div class="hh-fp-label">committed</div>
     </div>
     <div class="hh-fp-bar">
-      <div class="hh-fp-bar-fill" id="fpBarFill" style="width: 19.3%;"></div>
+      <div class="hh-fp-bar-fill" id="fpBarFill" style="width: 10.0%;"></div>
       <div class="hh-fp-bar-mark"></div>
     </div>
     <div class="hh-fp-phases">
       <div class="hh-fp-phase">
         <div class="hh-fp-phase-label">Phase 1</div>
-        <div class="hh-fp-phase-row"><span class="hh-fp-phase-amount">$1.5M</span><span class="hh-fp-phase-pct" id="fpPctP1">38.6%</span></div>
+        <div class="hh-fp-phase-row"><span class="hh-fp-phase-amount">$1.5M</span><span class="hh-fp-phase-pct" id="fpPctP1">20.0%</span></div>
       </div>
       <div class="hh-fp-phase fp-right">
         <div class="hh-fp-phase-label">Phase 2</div>
-        <div class="hh-fp-phase-row"><span class="hh-fp-phase-amount">$3M</span><span class="hh-fp-phase-pct" id="fpPctP2">19.3%</span></div>
+        <div class="hh-fp-phase-row"><span class="hh-fp-phase-amount">$3M</span><span class="hh-fp-phase-pct" id="fpPctP2">10.0%</span></div>
       </div>
     </div>
   </div>
@@ -800,6 +796,12 @@
       </div>
       <div class="hh-video-player" data-mp4="trailer.mp4">
         <img class="hh-video-thumb" src="https://img.youtube.com/vi/eCGSNeNXF5c/maxresdefault.jpg" alt="Watch the Harvest Hands trailer" loading="lazy" />
+        <button class="hh-video-play" type="button" aria-label="Play video">
+          <svg viewBox="0 0 18 20" fill="currentColor" aria-hidden="true"><path d="M18 10L0 20V0z"/></svg>
+        </button>
+      </div>
+      <div class="hh-video-player" data-mp4="news-recap.mp4">
+        <img class="hh-video-thumb" src="the-story-thumbnail.jpg" alt="The story behind the Harvest Hands building campaign" loading="lazy" />
         <button class="hh-video-play" type="button" aria-label="Play video">
           <svg viewBox="0 0 18 20" fill="currentColor" aria-hidden="true"><path d="M18 10L0 20V0z"/></svg>
         </button>
@@ -863,17 +865,24 @@
         <div class="hh-eyebrow">Campaign Progress</div>
         <h2 class="hh-display hh-h2">Stepping Through the Door.</h2>
         <p class="hh-callout hh-lead">Believing God for <strong>$3,000,000</strong> to possess the promise and prepare the house.</p>
+        <div class="hh-window-card">
+          <div class="hh-window-label">Phase One Giving Window</div>
+          <div class="hh-window-dates" style="font-size:38px;line-height:1.1;margin-bottom:4px;">Launch Sunday, April 26</div>
+          <div style="font-family:'Neue Haas',Helvetica,Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;">Giving Begins</div>
+          <div class="hh-window-dates" style="font-size:22px;line-height:1.2;margin-bottom:6px;">Ending Pentecost Sunday, May 24</div>
+          <div class="hh-window-meta">5 Sundays &nbsp;&bull;&nbsp; Phase One Goal: $1.5M</div>
+        </div>
       </div>
       <div class="hh-thermo-phases">
         <div class="hh-thermo-phase">First Step Through the Door<span>Phase One &middot; $1.5M</span></div>
         <div class="hh-thermo-phase">Finish the Project<span>Phase Two &middot; $3M</span></div>
       </div>
-      <div class="hh-thermo" data-raised="579307" data-goal="3000000" aria-label="Campaign progress">
-        <div class="hh-thermo-fill" style="width: 19.3%;"></div>
+      <div class="hh-thermo" data-raised="300603" data-goal="3000000" aria-label="Campaign progress">
+        <div class="hh-thermo-fill" style="width: 10.0%;"></div>
         <div class="hh-thermo-mark" aria-hidden="true"></div>
       </div>
       <div class="hh-thermo-meta">
-        <span class="hh-thermo-committed-group"><span id="thermoGiven">$508,155.16</span> <span class="hh-thermo-plus">+</span> <span id="thermoRegistered">$71,151</span> <span class="hh-thermo-meta-sublabel">registered commitments</span></span>
+        <span>$301K committed</span>
         <span>Goal &nbsp;$3M</span>
       </div>
       <p class="hh-thermo-note">Not equal gifts, but equal sacrifice.</p>
