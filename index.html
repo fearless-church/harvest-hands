@@ -884,7 +884,7 @@
         <div class="hh-thermo-mark" aria-hidden="true"></div>
       </div>
       <div class="hh-thermo-meta">
-        <span>$301K committed</span>
+        <span id="thermoCommitted">$301K committed</span>
         <span>Goal &nbsp;$3M</span>
       </div>
       <p class="hh-thermo-note">Not equal gifts, but equal sacrifice.</p>
@@ -1269,6 +1269,20 @@
         });
       }, { threshold: 0.4 });
       io.observe(thermo);
+    })();
+
+    /* ---------- Thermo committed text: mirror the widget so it can't drift ---------- */
+    (function () {
+      var out = document.getElementById('thermoCommitted');
+      var raisedEl = document.getElementById('fpRaised');
+      var thermo = document.querySelector('.hh-thermo');
+      var value = '';
+      if (raisedEl && raisedEl.textContent.trim()) {
+        value = raisedEl.textContent.trim();
+      } else if (thermo && thermo.getAttribute('data-raised')) {
+        value = '$' + Number(thermo.getAttribute('data-raised')).toLocaleString('en-US');
+      }
+      if (out && value) { out.textContent = value + ' committed'; }
     })();
 
     /* ---------- Floating progress: auto-switch light/dark ---------- */
