@@ -1,11 +1,55 @@
 import os
 import re
+import time
 import requests
 from datetime import datetime, timezone
 
 OVERFLOW_CLIENT_ID = os.environ["OVERFLOW_CLIENT_ID"]
 OVERFLOW_API_KEY = os.environ["OVERFLOW_API_KEY"]
 BASE_URL = "https://server.overflow.co/api/v3"
+
+# Overflow's bot-protection layer intermittently returns a transient 403 to the
+# default python-requests client. Send a normal browser User-Agent and reuse one
+# Session so the auth headers + UA are always attached to every call.
+USER_AGENT = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+)
+RETRY_STATUSES = {403, 429, 500, 502, 503, 504}
+
+SESSION = requests.Session()
+SESSION.headers.update({
+    "x-client-id": OVERFLOW_CLIENT_ID,
+    "x-api-key": OVERFLOW_API_KEY,
+    "User-Agent": USER_AGENT,
+    "Accept": "application/json",
+})
+
+def api_get(url, params=None, tries=4):
+    """GET an Overflow endpoint with retry + backoff.
+
+    A single transient 403/429/5xx should not kill the whole run, so retry a few
+    times with exponential backoff before giving up. The auth headers and
+    User-Agent come from SESSION.
+    """
+    resp = None
+    for attempt in range(1, tries + 1):
+        try:
+            resp = SESSION.get(url, params=params, timeout=30)
+        except requests.exceptions.RequestException as e:
+            if attempt < tries:
+                wait = 2 ** attempt
+                print(f"Overflow API request error on attempt {attempt}/{tries} ({e}); retrying in {wait}s...")
+                time.sleep(wait)
+                continue
+            raise
+        if resp.status_code in RETRY_STATUSES and attempt < tries:
+            wait = 2 ** attempt
+            print(f"Overflow API {resp.status_code} on attempt {attempt}/{tries}; retrying in {wait}s...")
+            time.sleep(wait)
+            continue
+        return resp
+    return resp
 
 # Church contribution (dollars) — update only when Ben instructs
 CHURCH_CONTRIBUTION = 141276.92
@@ -18,14 +62,8 @@ INCLUDE_STATUSES = {"CONFIRMED", "PAID_OUT", "PROCESSING", "PENDING", "APPROVED"
 
 def get_harvest_hands_campaign_id():
     """Find the Harvest Hands subcampaign ID under Los Angeles."""
-    headers = {
-        "x-client-id": OVERFLOW_CLIENT_ID,
-        "x-api-key": OVERFLOW_API_KEY
-    }
-
-    resp = requests.get(
+    resp = api_get(
         f"{BASE_URL}/campaigns",
-        headers=headers,
         params={"isSubcampaign": "false", "limit": 100}
     )
     resp.raise_for_status()
@@ -35,9 +73,8 @@ def get_harvest_hands_campaign_id():
     if not la:
         raise ValueError("Los Angeles campaign not found.")
 
-    resp = requests.get(
+    resp = api_get(
         f"{BASE_URL}/campaigns",
-        headers=headers,
         params={"isSubcampaign": "true", "parentCampaignId": la["id"], "limit": 100}
     )
     resp.raise_for_status()
@@ -52,15 +89,8 @@ def get_harvest_hands_campaign_id():
 
 def get_summary_total(subcampaign_id):
     """Get the totalContributionValue from the campaign summary endpoint."""
-    headers = {
-        "x-client-id": OVERFLOW_CLIENT_ID,
-        "x-api-key": OVERFLOW_API_KEY
-    }
     try:
-        resp = requests.get(
-            f"{BASE_URL}/campaigns/{subcampaign_id}",
-            headers=headers
-        )
+        resp = api_get(f"{BASE_URL}/campaigns/{subcampaign_id}")
         resp.raise_for_status()
         data = resp.json()
         summary_val = float(data.get("totalContributionValue", 0))
@@ -72,11 +102,6 @@ def get_summary_total(subcampaign_id):
 
 def get_all_contributions(subcampaign_id):
     """Page through all contributions for this subcampaign and sum valid ones."""
-    headers = {
-        "x-client-id": OVERFLOW_CLIENT_ID,
-        "x-api-key": OVERFLOW_API_KEY
-    }
-
     total = 0.0
     page = 1
     included = 0
@@ -84,9 +109,8 @@ def get_all_contributions(subcampaign_id):
     all_statuses = {}
 
     while True:
-        resp = requests.get(
+        resp = api_get(
             f"{BASE_URL}/contributions",
-            headers=headers,
             params={
                 "subcampaignId": subcampaign_id,
                 "limit": 100,
