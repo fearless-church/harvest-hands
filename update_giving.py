@@ -25,12 +25,24 @@ SESSION.headers.update({
     "Accept": "application/json",
 })
 
-def api_get(url, params=None, tries=4):
+MAX_BACKOFF = 30  # seconds — cap so a single run never stalls too long
+
+def _retry_wait(resp, attempt):
+    """Prefer the server's Retry-After hint (rate limits), else exponential backoff."""
+    retry_after = resp.headers.get("Retry-After") if resp is not None else None
+    if retry_after:
+        try:
+            return min(int(retry_after), MAX_BACKOFF)
+        except (TypeError, ValueError):
+            pass
+    return min(2 ** attempt, MAX_BACKOFF)
+
+def api_get(url, params=None, tries=5):
     """GET an Overflow endpoint with retry + backoff.
 
-    A single transient 403/429/5xx should not kill the whole run, so retry a few
-    times with exponential backoff before giving up. The auth headers and
-    User-Agent come from SESSION.
+    A transient 403/429/5xx should not kill the whole run, so retry a few times
+    with exponential backoff (honoring a Retry-After header when present) before
+    giving up. The auth headers and User-Agent come from SESSION.
     """
     resp = None
     for attempt in range(1, tries + 1):
@@ -38,13 +50,13 @@ def api_get(url, params=None, tries=4):
             resp = SESSION.get(url, params=params, timeout=30)
         except requests.exceptions.RequestException as e:
             if attempt < tries:
-                wait = 2 ** attempt
+                wait = min(2 ** attempt, MAX_BACKOFF)
                 print(f"Overflow API request error on attempt {attempt}/{tries} ({e}); retrying in {wait}s...")
                 time.sleep(wait)
                 continue
             raise
         if resp.status_code in RETRY_STATUSES and attempt < tries:
-            wait = 2 ** attempt
+            wait = _retry_wait(resp, attempt)
             print(f"Overflow API {resp.status_code} on attempt {attempt}/{tries}; retrying in {wait}s...")
             time.sleep(wait)
             continue
