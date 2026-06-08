@@ -780,7 +780,7 @@
   <div class="hh-floating-progress" id="floatingProgress">
     <div class="hh-fp-top">
       <div class="hh-fp-raised" id="fpRaised">$687,425.50</div>
-      <div class="hh-fp-label">committed</div>
+      <div class="hh-fp-label">total</div>
     </div>
     <div class="hh-fp-bar">
       <div class="hh-fp-bar-pledged" id="fpBarPledged" style="width: 22.9%;"></div>
@@ -918,7 +918,7 @@
         <div class="hh-thermo-mark" aria-hidden="true"></div>
       </div>
       <div class="hh-thermo-meta">
-        <span id="thermoCommitted">$687,425.50 committed</span>
+        <span id="thermoCommitted">$687,425.50 total</span>
         <span>Goal &nbsp;$3M</span>
       </div>
       <div class="hh-thermo-seglabels">
@@ -1321,7 +1321,7 @@
       function setWidth(id, p) { var e = document.getElementById(id); if (e) e.style.width = p + '%'; }
 
       // Text labels — main section + floating widget
-      setText('thermoCommitted', money(combined) + ' committed');
+      setText('thermoCommitted', money(combined) + ' total');
       setText('thermoReceived', money(received));
       setText('thermoPledged', money(pledged));
       setText('fpRaised', money(combined));
