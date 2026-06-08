@@ -67,7 +67,7 @@ def api_get(url, params=None, tries=5):
 CHURCH_CONTRIBUTION = 141276.92
 
 # Registered recurring commitments (dollars) — update only when Ben instructs
-REGISTERED_COMMITMENTS = 71151.36
+REGISTERED_COMMITMENTS = 78361.30
 
 # Statuses to include in the total
 INCLUDE_STATUSES = {"CONFIRMED", "PAID_OUT", "PROCESSING", "PENDING", "APPROVED"}
@@ -188,25 +188,12 @@ def update_html(overflow_dollars, church_dollars, registered_dollars):
     with open("index.html", "r", encoding="utf-8") as f:
         html = f.read()
 
-    # "Given" total = Overflow + Church (actual money moved)
-    given_total = overflow_dollars + church_dollars
-
-    # "Combined" total = Given + Registered Commitments (for floating widget + bar)
-    combined_total = given_total + registered_dollars
-
-    goal = 3_000_000
-    phase1_goal = 1_500_000
-
-    # Percentages based on COMBINED total
-    fill_pct = min((combined_total / goal) * 100, 100)
-    fill_str = f"{fill_pct:.1f}%"
-    pct_p1 = min((combined_total / phase1_goal) * 100, 100)
-    pct_p1_str = f"{pct_p1:.1f}%"
-
-    # Display strings
-    combined_display = format_display(combined_total)
-    given_display = format_display(given_total)
-    registered_display = f"${registered_dollars:,.0f}"
+    # Received = Overflow (auto-calculated) + Church (actual money in hand)
+    received_total = overflow_dollars + church_dollars
+    # Pledged = registered recurring commitments (promised, not yet received)
+    pledged_total = registered_dollars
+    # Committed = Received + Pledged (the headline total)
+    combined_total = received_total + pledged_total
 
     # Update timestamp
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
@@ -216,57 +203,21 @@ def update_html(overflow_dollars, church_dollars, registered_dollars):
         html
     )
 
-    # --- Floating widget ---
-    html = re.sub(
-        r'(<div class="hh-fp-raised" id="fpRaised">)\$[\d,.]+[KM]?(</div>)',
-        rf'\g<1>{combined_display}\g<2>',
-        html
-    )
-    html = re.sub(
-        r'(<div class="hh-fp-bar-fill" id="fpBarFill" style="width:\s*)[\d.]+%',
-        rf'\g<1>{fill_str}',
-        html
-    )
-    html = re.sub(
-        r'(<span class="hh-fp-phase-pct" id="fpPctP1">)[\d.]+%(</span>)',
-        rf'\g<1>{pct_p1_str}\g<2>',
-        html
-    )
-    html = re.sub(
-        r'(<span class="hh-fp-phase-pct" id="fpPctP2">)[\d.]+%(</span>)',
-        rf'\g<1>{fill_str}\g<2>',
-        html
-    )
-
-    # --- Thermometer section ---
-    html = re.sub(
-        r'data-raised="[\d.]+"',
-        f'data-raised="{combined_total:.0f}"',
-        html
-    )
-    html = re.sub(
-        r'(class="hh-thermo-fill"[^>]*style="width:\s*)[\d.]+%',
-        rf'\g<1>{fill_str}',
-        html
-    )
-    html = re.sub(
-        r'(<span id="thermoGiven">)\$[\d,.]+[KM]?(</span>)',
-        rf'\g<1>{given_display}\g<2>',
-        html
-    )
-    html = re.sub(
-        r'(<span id="thermoRegistered">)\$[\d,.]+[KM]?(</span>)',
-        rf'\g<1>{registered_display}\g<2>',
-        html
-    )
+    # The page's progress renderer (in index.html) reads these three data
+    # attributes on .hh-thermo and paints the two-tone bar, the seam labels, and
+    # the floating widget from them. Received/Pledged carry cents; data-raised
+    # stays a whole number so progress.html's integer regex keeps matching.
+    html = re.sub(r'data-received="[\d.]+"', f'data-received="{received_total:.2f}"', html)
+    html = re.sub(r'data-pledged="[\d.]+"', f'data-pledged="{pledged_total:.2f}"', html)
+    html = re.sub(r'data-raised="[\d.]+"', f'data-raised="{combined_total:.0f}"', html)
 
     with open("index.html", "w", encoding="utf-8") as f:
         f.write(html)
 
-    print(f"index.html updated:")
-    print(f"  Given: {given_display} (Overflow ${overflow_dollars:,.2f} + Church ${church_dollars:,.2f})")
-    print(f"  Registered Commitments: {registered_display}")
-    print(f"  Combined: {combined_display} ({fill_str} of $3M goal)")
+    print("index.html updated:")
+    print(f"  Received: ${received_total:,.2f} (Overflow ${overflow_dollars:,.2f} + Church ${church_dollars:,.2f})")
+    print(f"  Pledged:  ${pledged_total:,.2f}")
+    print(f"  Committed (combined): ${combined_total:,.2f}")
 
 if __name__ == "__main__":
     subcampaign_id, subcampaign_data = get_harvest_hands_campaign_id()

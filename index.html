@@ -367,7 +367,17 @@
   .hh-thermo-phase { flex: 0 0 50%; text-align: center; position: relative; }
   .hh-thermo-phase span { display: block; font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 6px; opacity: 0.65; }
   .hh-thermo { max-width: 820px; margin: 0 auto; height: 18px; background-color: var(--fg-rule-soft); border: 1px solid var(--fg-rule); position: relative; overflow: visible; }
-  .hh-thermo-fill { height: 100%; background: var(--fg); transition: width 0.8s ease; }
+  .hh-thermo-pledged { position: absolute; left: 0; top: 0; height: 100%; width: 0; background: rgba(15,13,11,0.38); transition: width 1200ms cubic-bezier(0.22,0.9,0.3,1); z-index: 1; }
+  .hh-thermo-received { position: absolute; left: 0; top: 0; height: 100%; width: 0; background: var(--fg); transition: width 1200ms cubic-bezier(0.22,0.9,0.3,1); z-index: 2; }
+  .hh-thermo-seam { position: absolute; top: -5px; bottom: -5px; width: 1.5px; background: var(--fg); left: 0; z-index: 3; opacity: 0.5; }
+  .hh-thermo-seglabels { position: relative; max-width: 820px; margin: 14px auto 0; height: 36px; }
+  .hh-thermo-seg { position: absolute; top: 0; }
+  .hh-thermo-seg-received { left: 0; width: 0; text-align: right; padding-right: 9px; }
+  .hh-thermo-seg-pledged { left: 0; text-align: left; padding-left: 9px; border-left: 1.5px solid var(--fg); }
+  .hh-thermo-seg-name { display: block; font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.55; margin-bottom: 3px; white-space: nowrap; }
+  .hh-thermo-seg-amt { display: block; font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-weight: 700; font-size: 15px; letter-spacing: -0.01em; white-space: nowrap; }
+  .hh-thermo-seg-received .hh-thermo-seg-amt { color: var(--fg); }
+  .hh-thermo-seg-pledged .hh-thermo-seg-amt { color: rgba(15,13,11,0.5); }
   .hh-thermo-mark { position: absolute; top: -80px; bottom: -60px; width: 1.5px; background: var(--fg); left: 50%; transform: translateX(-50%); z-index: 2; opacity: 0.35; }
   .hh-thermo-meta { display: flex; justify-content: space-between; max-width: 820px; margin: 16px auto 0; font-size: 12px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg); }
   .hh-thermo-note { margin-top: 32px; font-family: 'Ascentis', Georgia, serif; font-size: 20px; opacity: 0.75; }
@@ -524,8 +534,6 @@
   @keyframes hhKenBurns { 0% { transform: scale(1.02) translate(0, 0); } 100% { transform: scale(1.08) translate(-1.2%, -0.6%); } }
   .hh-scroll-cue { animation: hhScrollCue 2.8s ease-in-out infinite; }
   @keyframes hhScrollCue { 0%, 100% { transform: translate(-50%, 0); opacity: 0.7; } 50% { transform: translate(-50%, 6px); opacity: 1; } }
-  .hh-thermo-fill { width: 0 !important; transition: width 1600ms cubic-bezier(0.22, 0.9, 0.3, 1); }
-  .hh-thermo.is-filled .hh-thermo-fill { width: var(--fill-width, 8.5%) !important; }
   .hh-faq-item[open] .hh-faq-answer { animation: hhFaqOpen 380ms ease both; }
   @keyframes hhFaqOpen { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
   @media (prefers-reduced-motion: reduce) {
@@ -534,7 +542,7 @@
     .hh-hero-content > * { animation: none !important; opacity: 1 !important; transform: none !important; }
     .hh-hero-video { animation: none !important; }
     .hh-scroll-cue { animation: none !important; }
-    .hh-thermo-fill { transition: none !important; }
+    .hh-thermo-pledged, .hh-thermo-received { transition: none !important; }
     .hh-faq-item[open] .hh-faq-answer { animation: none !important; }
   }
   @media (max-width: 820px) {
@@ -550,6 +558,10 @@
     .hh-thermo-note { font-size: 17px; }
     .hh-thermo-phases { font-size: 10px; letter-spacing: 0.18em; gap: 8px; }
     .hh-thermo-phase span { font-size: 9px; letter-spacing: 0.14em; }
+    /* On phones the seam-anchored labels would collide; stack them as a simple key instead. */
+    .hh-thermo-seglabels { height: auto; display: flex; flex-direction: column; gap: 10px; }
+    .hh-thermo-seg { position: static !important; left: auto !important; width: auto !important; text-align: left !important; padding-right: 0 !important; }
+    .hh-thermo-seg-pledged { padding-left: 9px; }
     .hh-window-card { padding: 16px 20px; max-width: 100%; }
     .hh-window-dates { font-size: 22px; }
     .hh-window-meta { font-size: 11px; letter-spacing: 0.18em; }
@@ -668,12 +680,29 @@
     transition: background 0.4s ease;
   }
   .fp-light .hh-fp-bar { background: rgba(15, 13, 11, 0.12); }
-  .hh-fp-bar-fill {
-    height: 100%;
+  .hh-fp-bar-pledged {
+    position: absolute; left: 0; top: 0; height: 100%; width: 0;
+    background: rgba(237, 226, 204, 0.42);
+    transition: width 0.8s ease, background 0.4s ease;
+  }
+  .hh-fp-bar-received {
+    position: absolute; left: 0; top: 0; height: 100%; width: 0;
     background: var(--cream);
     transition: width 0.8s ease, background 0.4s ease;
   }
-  .fp-light .hh-fp-bar-fill { background: var(--charcoal); }
+  .fp-light .hh-fp-bar-pledged { background: rgba(15, 13, 11, 0.38); }
+  .fp-light .hh-fp-bar-received { background: var(--charcoal); }
+  .hh-fp-key { display: flex; justify-content: space-between; gap: 8px; margin-top: 2px; }
+  .hh-fp-key-item { display: flex; align-items: baseline; gap: 5px; }
+  .hh-fp-dot { width: 7px; height: 7px; border-radius: 999px; flex: 0 0 auto; align-self: center; }
+  .hh-fp-dot.fp-dot-received { background: rgba(237, 226, 204, 0.9); }
+  .hh-fp-dot.fp-dot-pledged { background: rgba(237, 226, 204, 0.42); }
+  .fp-light .hh-fp-dot.fp-dot-received { background: var(--charcoal); }
+  .fp-light .hh-fp-dot.fp-dot-pledged { background: rgba(15, 13, 11, 0.38); }
+  .hh-fp-key-label { font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-size: 8px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(237, 226, 204, 0.5); }
+  .fp-light .hh-fp-key-label { color: rgba(15, 13, 11, 0.45); }
+  .hh-fp-key-amt { font-family: 'Neue Haas', Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: -0.01em; color: rgba(237, 226, 204, 0.82); }
+  .fp-light .hh-fp-key-amt { color: rgba(15, 13, 11, 0.7); }
   .hh-fp-bar-mark {
     position: absolute;
     top: -3px;
@@ -740,8 +769,8 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .hh-floating-progress, .hh-fp-raised, .hh-fp-label, .hh-fp-bar,
-    .hh-fp-bar-fill, .hh-fp-phases, .hh-fp-phase-label,
-    .hh-fp-phase-amount, .hh-fp-phase-pct, .hh-fp-bar-mark { transition: none !important; }
+    .hh-fp-bar-received, .hh-fp-bar-pledged, .hh-fp-key, .hh-fp-key-label,
+    .hh-fp-key-amt, .hh-fp-bar-mark { transition: none !important; }
   }
 </style>
 </head>
@@ -750,21 +779,24 @@
   <!-- Floating Progress Widget -->
   <div class="hh-floating-progress" id="floatingProgress">
     <div class="hh-fp-top">
-      <div class="hh-fp-raised" id="fpRaised">$680,215.56</div>
+      <div class="hh-fp-raised" id="fpRaised">$687,425.50</div>
       <div class="hh-fp-label">committed</div>
     </div>
     <div class="hh-fp-bar">
-      <div class="hh-fp-bar-fill" id="fpBarFill" style="width: 22.7%;"></div>
+      <div class="hh-fp-bar-pledged" id="fpBarPledged" style="width: 22.9%;"></div>
+      <div class="hh-fp-bar-received" id="fpBarReceived" style="width: 20.3%;"></div>
       <div class="hh-fp-bar-mark"></div>
     </div>
-    <div class="hh-fp-phases">
-      <div class="hh-fp-phase">
-        <div class="hh-fp-phase-label">Phase 1</div>
-        <div class="hh-fp-phase-row"><span class="hh-fp-phase-amount">$1.5M</span><span class="hh-fp-phase-pct" id="fpPctP1">45.3%</span></div>
+    <div class="hh-fp-key">
+      <div class="hh-fp-key-item">
+        <span class="hh-fp-dot fp-dot-received"></span>
+        <span class="hh-fp-key-label">Received</span>
+        <span class="hh-fp-key-amt" id="fpReceived">$609K</span>
       </div>
-      <div class="hh-fp-phase fp-right">
-        <div class="hh-fp-phase-label">Phase 2</div>
-        <div class="hh-fp-phase-row"><span class="hh-fp-phase-amount">$3M</span><span class="hh-fp-phase-pct" id="fpPctP2">22.7%</span></div>
+      <div class="hh-fp-key-item">
+        <span class="hh-fp-dot fp-dot-pledged"></span>
+        <span class="hh-fp-key-label">Pledged</span>
+        <span class="hh-fp-key-amt" id="fpPledged">$78K</span>
       </div>
     </div>
   </div>
@@ -879,13 +911,25 @@
         <div class="hh-thermo-phase">First Step Through the Door<span>Phase One &middot; $1.5M</span></div>
         <div class="hh-thermo-phase">Finish the Project<span>Phase Two &middot; $3M</span></div>
       </div>
-      <div class="hh-thermo" data-raised="680216" data-goal="3000000" aria-label="Campaign progress">
-        <div class="hh-thermo-fill" style="width: 22.7%;"></div>
+      <div class="hh-thermo" data-received="609064.20" data-pledged="78361.30" data-raised="687426" data-goal="3000000" aria-label="Campaign progress">
+        <div class="hh-thermo-pledged" id="thermoBarPledged" style="width: 22.9%;"></div>
+        <div class="hh-thermo-received" id="thermoBarReceived" style="width: 20.3%;"></div>
+        <div class="hh-thermo-seam" id="thermoSeam" style="left: 20.3%;"></div>
         <div class="hh-thermo-mark" aria-hidden="true"></div>
       </div>
       <div class="hh-thermo-meta">
-        <span id="thermoCommitted">$301K committed</span>
+        <span id="thermoCommitted">$687,425.50 committed</span>
         <span>Goal &nbsp;$3M</span>
+      </div>
+      <div class="hh-thermo-seglabels">
+        <div class="hh-thermo-seg hh-thermo-seg-received" id="thermoReceivedLabel" style="width: 20.3%;">
+          <span class="hh-thermo-seg-name">Received</span>
+          <span class="hh-thermo-seg-amt" id="thermoReceived">$609,064.20</span>
+        </div>
+        <div class="hh-thermo-seg hh-thermo-seg-pledged" id="thermoPledgedLabel" style="left: 20.3%;">
+          <span class="hh-thermo-seg-name">Pledged</span>
+          <span class="hh-thermo-seg-amt" id="thermoPledged">$78,361.30</span>
+        </div>
       </div>
       <p class="hh-thermo-note">Not equal gifts, but equal sacrifice.</p>
     </div>
@@ -1253,36 +1297,60 @@
         toObserve.forEach(function (el) { io.observe(el); });
       }
     })();
+    /* ---------- Progress renderer: paint Received + Pledged everywhere from the
+         data attributes on .hh-thermo, so the bars, labels, and widget can never
+         drift out of sync with the numbers. ---------- */
     (function () {
       var thermo = document.querySelector('.hh-thermo');
       if (!thermo) return;
-      var fill = thermo.querySelector('.hh-thermo-fill');
-      if (!fill) return;
-      var initial = fill.style.width || '8.5%';
-      thermo.style.setProperty('--fill-width', initial);
-      fill.style.width = '0%';
-      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduce || !('IntersectionObserver' in window)) { thermo.classList.add('is-filled'); return; }
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) { setTimeout(function () { thermo.classList.add('is-filled'); }, 200); io.unobserve(entry.target); }
-        });
-      }, { threshold: 0.4 });
-      io.observe(thermo);
-    })();
+      var goal = Number(thermo.getAttribute('data-goal')) || 3000000;
+      var received = Number(thermo.getAttribute('data-received')) || 0;
+      var pledged = Number(thermo.getAttribute('data-pledged')) || 0;
+      var combined = received + pledged;
+      var pctR = Math.max(0, Math.min(received / goal * 100, 100));
+      var pctC = Math.max(0, Math.min(combined / goal * 100, 100));
 
-    /* ---------- Thermo committed text: mirror the widget so it can't drift ---------- */
-    (function () {
-      var out = document.getElementById('thermoCommitted');
-      var raisedEl = document.getElementById('fpRaised');
-      var thermo = document.querySelector('.hh-thermo');
-      var value = '';
-      if (raisedEl && raisedEl.textContent.trim()) {
-        value = raisedEl.textContent.trim();
-      } else if (thermo && thermo.getAttribute('data-raised')) {
-        value = '$' + Number(thermo.getAttribute('data-raised')).toLocaleString('en-US');
+      function money(n) { return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+      function abbr(n) {
+        if (n >= 1000000) return '$' + (n / 1000000).toFixed(n % 1000000 === 0 ? 0 : 1) + 'M';
+        if (n >= 1000) return '$' + Math.round(n / 1000) + 'K';
+        return '$' + Math.round(n);
       }
-      if (out && value) { out.textContent = value + ' committed'; }
+      function setText(id, v) { var e = document.getElementById(id); if (e) e.textContent = v; }
+      function setLeft(id, p) { var e = document.getElementById(id); if (e) e.style.left = p + '%'; }
+      function setWidth(id, p) { var e = document.getElementById(id); if (e) e.style.width = p + '%'; }
+
+      // Text labels — main section + floating widget
+      setText('thermoCommitted', money(combined) + ' committed');
+      setText('thermoReceived', money(received));
+      setText('thermoPledged', money(pledged));
+      setText('fpRaised', money(combined));
+      setText('fpReceived', abbr(received));
+      setText('fpPledged', abbr(pledged));
+
+      // Seam-anchored label positions (the dark/light boundary sits at pctR)
+      setWidth('thermoReceivedLabel', pctR);
+      setLeft('thermoPledgedLabel', pctR);
+      setLeft('thermoSeam', pctR);
+
+      // Floating widget bars fill immediately (always visible up top)
+      setWidth('fpBarReceived', pctR);
+      setWidth('fpBarPledged', pctC);
+
+      // Big bar fills when scrolled into view (subtle motion), respecting reduced-motion
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function paintBig() { setWidth('thermoBarReceived', pctR); setWidth('thermoBarPledged', pctC); }
+      if (reduce || !('IntersectionObserver' in window)) {
+        paintBig();
+      } else {
+        setWidth('thermoBarReceived', 0); setWidth('thermoBarPledged', 0);
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) { setTimeout(paintBig, 200); io.disconnect(); }
+          });
+        }, { threshold: 0.4 });
+        io.observe(thermo);
+      }
     })();
 
     /* ---------- Floating progress: auto-switch light/dark ---------- */
