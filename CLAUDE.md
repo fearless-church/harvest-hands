@@ -15,9 +15,13 @@ figure from prose or from older notes without confirming it against the file fir
 ## Repository and hosting
 - Repo: fearless-church/harvest-hands (public)
 - Host: Netlify
-- Deploy: Netlify CLI deploy, run from a GitHub Actions workflow. Netlify auto builds
-  are OFF on purpose to save credits. The ONLY path to production is the workflow.
-- Schedule: a GitHub Actions cron runs every 30 minutes to refresh giving data and deploy.
+- Deploy: Netlify AUTO-PUBLISHES from GitHub on every push to main. Pushing a commit
+  is all that's needed to update production. (History: the workflow used to run an
+  explicit `netlify deploy` CLI step, but as of 2026-07-08 that step was removed
+  because it targeted a stale site ID/token, 404'd every run, and spammed failure
+  emails — while the site was already deploying fine via Netlify's Git integration.)
+- Schedule: a GitHub Actions cron runs every 30 minutes to refresh giving data and
+  commit it; Netlify then auto-deploys that commit.
 - Key files (confirm exact paths with a directory listing before editing):
   - index.html ............... main campaign page
   - live.html ................ real time stage display, polls every 10s during services
@@ -46,10 +50,10 @@ figure from prose or from older notes without confirming it against the file fir
 - Never print, log, echo, or commit these values. Use the existing env wiring only.
 
 ## How to deploy from Claude Code
-- Edit files directly in the repo, then commit and push.
-- A plain push does NOT deploy, because Netlify auto build is off. Production updates
-  go through the Actions workflow (the scheduled run, or a manual dispatch if one is
-  defined, e.g. `gh workflow run update_giving.yml`).
+- Edit files directly in the repo, then commit and push to main.
+- A push to main IS the deploy: Netlify auto-publishes from GitHub, so the commit goes
+  live on its own within a minute or so. No workflow run is required just to deploy.
+  (`gh workflow run update_giving.yml` only refreshes the giving numbers.)
 - Before committing, diff against the prior version and confirm ONLY intended lines
   changed. Verify the current file state instead of assuming it.
 - The money and widget rendering in index.html is the most fragile part of the site.

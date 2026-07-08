@@ -38,10 +38,8 @@ jobs:
           git diff --cached --quiet || git commit -m "Auto-update: Harvest Hands giving total"
           git push
 
-      - name: Deploy to Netlify
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        run: |
-          npm install -g netlify-cli
-          netlify deploy --prod --dir=. --site=$NETLIFY_SITE_ID --auth=$NETLIFY_AUTH_TOKEN
+      # Netlify auto-publishes from GitHub on every push, so the commit above is
+      # all that's needed to update the live site. The old `netlify deploy` CLI
+      # step was removed 2026-07-08: it targeted a stale site ID/token, returned
+      # 404 ("Not Found"), and failed every run (sending failure emails) even
+      # though the site was already deploying fine via Netlify's Git integration.
