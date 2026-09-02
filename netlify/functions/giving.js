@@ -3,7 +3,8 @@ export default async (request, context) => {
   const API_KEY = Netlify.env.get("OVERFLOW_API_KEY");
   const BASE = "https://server.overflow.co/api/v3";
   const CHURCH_CONTRIBUTION = 141276.92;
-  const REGISTERED_COMMITMENTS = 71151.36;
+  // Pledges/registered commitments are intentionally NOT included — the live
+  // display shows Received only (Overflow + Church), matching the website.
   const INCLUDE = new Set(["CONFIRMED", "PAID_OUT", "PROCESSING", "PENDING", "APPROVED"]);
 
   try {
@@ -35,13 +36,12 @@ export default async (request, context) => {
       page++;
     }
 
-    const grandTotal = total + CHURCH_CONTRIBUTION + REGISTERED_COMMITMENTS;
+    const received = total + CHURCH_CONTRIBUTION;
 
     return Response.json({
       overflow: Math.round(total * 100) / 100,
       church: CHURCH_CONTRIBUTION,
-      registered: REGISTERED_COMMITMENTS,
-      total: Math.round(grandTotal * 100) / 100,
+      total: Math.round(received * 100) / 100,
       phase1Goal: 1500000,
       phase2Goal: 3000000,
       timestamp: new Date().toISOString()

@@ -66,8 +66,9 @@ def api_get(url, params=None, tries=5):
 # Church contribution (dollars) — update only when Ben instructs
 CHURCH_CONTRIBUTION = 141276.92
 
-# Registered recurring commitments (dollars) — update only when Ben instructs
-REGISTERED_COMMITMENTS = 78361.30
+# NOTE: Pledges/registered commitments are intentionally NOT part of the
+# displayed number anymore (the site shows Received only). If pledges ever need
+# to be shown again, reintroduce a constant and add it back in update_html().
 
 # Statuses to include in the total
 INCLUDE_STATUSES = {"CONFIRMED", "PAID_OUT", "PROCESSING", "PENDING", "APPROVED"}
@@ -184,16 +185,14 @@ def get_all_contributions(subcampaign_id):
 def format_display(dollars):
     return f"${dollars:,.2f}"
 
-def update_html(overflow_dollars, church_dollars, registered_dollars):
+def update_html(overflow_dollars, church_dollars):
     with open("index.html", "r", encoding="utf-8") as f:
         html = f.read()
 
-    # Received = Overflow (auto-calculated) + Church (actual money in hand)
+    # Received = Overflow (auto-calculated) + Church (actual money in hand).
+    # This is the ONLY figure the site displays. Pledges are intentionally not
+    # shown — a note on the page explains the number rises as pledges arrive.
     received_total = overflow_dollars + church_dollars
-    # Pledged = registered recurring commitments (promised, not yet received)
-    pledged_total = registered_dollars
-    # Committed = Received + Pledged (the headline total)
-    combined_total = received_total + pledged_total
 
     # Update timestamp
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
@@ -203,21 +202,18 @@ def update_html(overflow_dollars, church_dollars, registered_dollars):
         html
     )
 
-    # The page's progress renderer (in index.html) reads these three data
-    # attributes on .hh-thermo and paints the two-tone bar, the seam labels, and
-    # the floating widget from them. Received/Pledged carry cents; data-raised
-    # stays a whole number so progress.html's integer regex keeps matching.
+    # The page's progress renderer (in index.html) reads data-received on
+    # .hh-thermo and paints the bar, label, and floating widget from it.
+    # data-received carries cents; data-raised is the same Received amount as a
+    # whole number so progress.html's integer regex keeps matching.
     html = re.sub(r'data-received="[\d.]+"', f'data-received="{received_total:.2f}"', html)
-    html = re.sub(r'data-pledged="[\d.]+"', f'data-pledged="{pledged_total:.2f}"', html)
-    html = re.sub(r'data-raised="[\d.]+"', f'data-raised="{combined_total:.0f}"', html)
+    html = re.sub(r'data-raised="[\d.]+"', f'data-raised="{received_total:.0f}"', html)
 
     with open("index.html", "w", encoding="utf-8") as f:
         f.write(html)
 
     print("index.html updated:")
-    print(f"  Received: ${received_total:,.2f} (Overflow ${overflow_dollars:,.2f} + Church ${church_dollars:,.2f})")
-    print(f"  Pledged:  ${pledged_total:,.2f}")
-    print(f"  Committed (combined): ${combined_total:,.2f}")
+    print(f"  Received (shown): ${received_total:,.2f} (Overflow ${overflow_dollars:,.2f} + Church ${church_dollars:,.2f})")
 
 if __name__ == "__main__":
     subcampaign_id, subcampaign_data = get_harvest_hands_campaign_id()
@@ -237,7 +233,6 @@ if __name__ == "__main__":
         print(f"Using PAGINATED total: ${paginated_total:,.2f} (>= summary ${summary_total:,.2f})")
         overflow_total = paginated_total
 
-    print(f"Overflow: ${overflow_total:,.2f} + Church: ${CHURCH_CONTRIBUTION:,.2f} + Registered: ${REGISTERED_COMMITMENTS:,.2f}")
-    total = overflow_total + CHURCH_CONTRIBUTION + REGISTERED_COMMITMENTS
-    print(f"Combined Total: ${total:,.2f}")
-    update_html(overflow_total, CHURCH_CONTRIBUTION, REGISTERED_COMMITMENTS)
+    received = overflow_total + CHURCH_CONTRIBUTION
+    print(f"Received (shown on site): ${received:,.2f} (Overflow ${overflow_total:,.2f} + Church ${CHURCH_CONTRIBUTION:,.2f})")
+    update_html(overflow_total, CHURCH_CONTRIBUTION)
