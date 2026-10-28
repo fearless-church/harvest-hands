@@ -1,8 +1,11 @@
 import os
+import json
 import re
 import time
 import requests
 from datetime import datetime, timezone
+from decimal import Decimal, ROUND_HALF_UP
+from pathlib import Path
 
 OVERFLOW_CLIENT_ID = os.environ["OVERFLOW_CLIENT_ID"]
 OVERFLOW_API_KEY = os.environ["OVERFLOW_API_KEY"]
@@ -73,6 +76,31 @@ CHURCH_CONTRIBUTION = 141276.92
 # Statuses to include in the total
 INCLUDE_STATUSES = {"CONFIRMED", "PAID_OUT", "PROCESSING", "PENDING", "APPROVED"}
 
+# Shared with the live display. Entries are confirmed net deposits keyed by
+# Overflow transaction ID, never blanket additions to the campaign total.
+VERIFIED_RECEIPTS = json.loads(
+    (Path(__file__).parent / "netlify/lib/verified-receipts.json").read_text()
+)
+REVERSED_STATUSES = {"FAILED", "REFUNDED", "CHARGEBACK", "CANCELLED", "CANCELED"}
+
+def contribution_cents(contribution):
+    status = contribution.get("status", "")
+    receipt = VERIFIED_RECEIPTS.get(contribution.get("id"))
+    if receipt is not None:
+        if status in REVERSED_STATUSES:
+            return 0
+        if contribution.get("type") != receipt["type"]:
+            raise ValueError("Verified receipt type changed; reconciliation required.")
+        if status not in INCLUDE_STATUSES | {"CONTRIBUTION_RECEIVED"}:
+            raise ValueError("Verified receipt status changed; reconciliation required.")
+        return receipt["receivedCents"]
+    if status not in INCLUDE_STATUSES:
+        return 0
+    amount = Decimal(str(contribution["amount"]))
+    if not amount.is_finite() or amount < 0:
+        raise ValueError("Invalid contribution amount.")
+    return int((amount * 100).quantize(Decimal("1"), rounding=ROUND_HALF_UP))
+
 def get_harvest_hands_campaign_id():
     """Find the Harvest Hands subcampaign ID under Los Angeles."""
     resp = api_get(
@@ -100,87 +128,43 @@ def get_harvest_hands_campaign_id():
     print(f"Found subcampaign: {hh['name']} ({hh['id']})")
     return hh["id"], hh
 
-def get_summary_total(subcampaign_id):
-    """Get the totalContributionValue from the campaign summary endpoint."""
-    try:
-        resp = api_get(f"{BASE_URL}/campaigns/{subcampaign_id}")
-        resp.raise_for_status()
-        data = resp.json()
-        summary_val = float(data.get("totalContributionValue", 0))
-        print(f"Campaign summary totalContributionValue: ${summary_val:,.2f}")
-        return summary_val
-    except Exception as e:
-        print(f"Warning: Could not fetch campaign summary: {e}")
-        return 0.0
-
 def get_all_contributions(subcampaign_id):
-    """Page through all contributions for this subcampaign and sum valid ones."""
-    total = 0.0
+    """Sum unique transactions, substituting verified net deposits by ID."""
+    total_cents = 0
     page = 1
-    included = 0
-    skipped = 0
-    all_statuses = {}
-
+    seen = {}
     while True:
         resp = api_get(
             f"{BASE_URL}/contributions",
-            params={
-                "subcampaignId": subcampaign_id,
-                "limit": 100,
-                "page": page
-            }
+            params={"subcampaignId": subcampaign_id, "limit": 100, "page": page}
         )
         resp.raise_for_status()
-        data = resp.json()
-        contributions = data.get("data", [])
-        total_count = data.get("totalCount", 0)
-
-        if not contributions:
-            break
-
-        for c in contributions:
-            status = c.get("status", "")
-            amount = float(c.get("amount", 0))
-            contrib_id = c.get("id", "")
-
-            # Track all statuses
-            if status not in all_statuses:
-                all_statuses[status] = {"count": 0, "total": 0.0}
-            all_statuses[status]["count"] += 1
-            all_statuses[status]["total"] += amount
-
-            # Look for Christy's $2,500 contribution
-            if contrib_id == "6a032866bb98a3fb32a98ccc":
-                print(f"  *** FOUND target contribution {contrib_id}: status={repr(status)} amount=${amount:,.2f} in_filter={status in INCLUDE_STATUSES}")
-
-            if status in INCLUDE_STATUSES:
-                total += amount
-                included += 1
-            else:
-                skipped += 1
-                print(f"  Skipped: status={status} amount=${amount:,.2f}")
-
-        print(f"Page {page}: {len(contributions)} contributions, running total ${total:,.2f}")
-
+        contributions = resp.json().get("data")
+        if not isinstance(contributions, list):
+            raise ValueError("Invalid contributions response; refusing to update.")
+        for contribution in contributions:
+            contribution_id = contribution.get("id")
+            if not contribution_id:
+                raise ValueError("Missing transaction ID; cannot prevent duplicate counting.")
+            fingerprint = (contribution.get("status"), contribution.get("amount"), contribution.get("type"))
+            if contribution_id in seen:
+                if seen[contribution_id] != fingerprint:
+                    raise ValueError("Transaction changed during pagination; retry a fresh snapshot.")
+                continue
+            seen[contribution_id] = fingerprint
+            cents = contribution_cents(contribution)
+            total_cents += cents
+            if contribution_id in VERIFIED_RECEIPTS:
+                print(f"Verified receipt counted: ${cents / 100:,.2f}; status={contribution.get('status')}")
+        print(f"Page {page}: {len(contributions)} records, running total ${total_cents / 100:,.2f}")
+        # Overflow totalCount can exclude failed records that are still returned.
+        # Continue through the actual final page rather than stopping at totalCount.
         if len(contributions) < 100:
             break
         page += 1
-
-    print(f"Done: {included} included, {skipped} skipped, total ${total:,.2f}")
-
-    # Print all unique statuses the API returned
-    print(f"=== ALL API STATUSES ===")
-    for status, info in sorted(all_statuses.items()):
-        in_filter = "INCLUDED" if status in INCLUDE_STATUSES else "EXCLUDED"
-        print(f"  {repr(status)}: {info['count']} contributions, ${info['total']:,.2f} [{in_filter}]")
-    if "6a032866bb98a3fb32a98ccc" not in str(data):
-        print(f"  *** Christy's contribution (6a032866bb98a3fb32a98ccc) was NOT in any API response ***")
-
-    # Safety guard
-    if total <= 0:
-        raise ValueError(f"API returned ${total} for Harvest Hands. Refusing to update.")
-
-    return total
+    if total_cents <= 0:
+        raise ValueError("API returned no positive total. Refusing to update.")
+    return total_cents / 100
 
 def format_display(dollars):
     return f"${dollars:,.2f}"
@@ -218,20 +202,9 @@ def update_html(overflow_dollars, church_dollars):
 if __name__ == "__main__":
     subcampaign_id, subcampaign_data = get_harvest_hands_campaign_id()
 
-    # Method 1: Paginate individual contributions and sum valid statuses
-    paginated_total = get_all_contributions(subcampaign_id)
-
-    # Method 2: Campaign summary totalContributionValue (may include APPROVED)
-    summary_total = get_summary_total(subcampaign_id)
-
-    # Use whichever is higher (summary may include APPROVED contributions
-    # that the paginated endpoint doesn't return)
-    if summary_total > paginated_total:
-        print(f"Using SUMMARY total: ${summary_total:,.2f} (higher than paginated ${paginated_total:,.2f} by ${summary_total - paginated_total:,.2f})")
-        overflow_total = summary_total
-    else:
-        print(f"Using PAGINATED total: ${paginated_total:,.2f} (>= summary ${summary_total:,.2f})")
-        overflow_total = paginated_total
+    # Only reconciled individual transactions can determine the displayed total.
+    # An aggregate campaign summary cannot preserve receipt-specific net values.
+    overflow_total = get_all_contributions(subcampaign_id)
 
     received = overflow_total + CHURCH_CONTRIBUTION
     print(f"Received (shown on site): ${received:,.2f} (Overflow ${overflow_total:,.2f} + Church ${CHURCH_CONTRIBUTION:,.2f})")

@@ -34,8 +34,9 @@ figure from prose or from older notes without confirming it against the file fir
   silently returns $0.
 - Never use the campaign summary field `totalContributionValue`. It excludes
   "Processing" transactions and will undercount.
-- Always paginate individual contributions: `limit` 100, increment `page` until
-  `page * 100 >= totalCount`.
+- Always paginate individual contributions with `limit` 100 until the actual
+  final page contains fewer than 100 records. Overflow totalCount can exclude
+  failed transactions that are still returned; stopping at totalCount loses gifts.
 - The status filter must include ALL of: CONFIRMED, PAID_OUT, PROCESSING, PENDING,
   APPROVED. APPROVED is undocumented but real; it captures recent card and Apple Pay
   transactions still in transition.
@@ -43,6 +44,19 @@ figure from prose or from older notes without confirming it against the file fir
 - Contribution amounts come back in dollars, not cents.
 - Safety guard: NEVER write or commit a $0 total to the site. Treat a $0 result as a
   fetch failure and abort the update.
+
+## Verified stock receipts
+- Both display calculations read `netlify/lib/verified-receipts.json`.
+- Each entry is a confirmed net deposit in cents, keyed by the exact Overflow
+  contribution ID. Do not put donor names or bank information in this public file.
+- A matching STOCK contribution in CONTRIBUTION_RECEIVED or an existing included
+  status uses that confirmed net amount instead of the reported gross amount.
+- This is a replacement, never an additional gift. Duplicate IDs count once;
+  conflicting duplicates fail safely. Failed/refunded/chargeback/cancelled gifts
+  do not count. Unexpected status or type changes require reconciliation.
+- Other CONTRIBUTION_RECEIVED records are not automatically counted at gross.
+  Confirm their deposited amount and transaction ID before adding an entry.
+- Never restore a campaign-summary fallback: it would bypass net corrections.
 
 ## Secrets
 - OVERFLOW_CLIENT_ID and OVERFLOW_API_KEY are stored in GitHub Actions secrets and in
